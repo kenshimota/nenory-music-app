@@ -13,7 +13,7 @@ jobs:
   laravel-test:
     runs-on: ubuntu-latest
     container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.1
+      image: php:8.2-fpm
  
     services:
       mysql:
@@ -29,10 +29,17 @@ jobs:
       - uses: actions/checkout@v1
         with:
           fetch-depth: 1
- 
+      
+      - name: Install dependencies for Operative System
+        run: |
+          apt-get update && apt-get install -y curl libpng-dev libonig-dev libxml2-dev zip unzip |
+          docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd |
+          curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+          chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
       - name: Install composer dependencies
         run: |
-          composer install --no-scripts
+          composer install --optimize-autoloader --no-dev
  
       - name: Prepare Laravel Application
         run: |
