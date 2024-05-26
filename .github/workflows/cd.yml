@@ -35,7 +35,6 @@ jobs:
           apt-get update && apt-get install -y curl libpng-dev libonig-dev libxml2-dev zip unzip |
           docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd |
           curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-          chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
       - name: Install composer dependencies
         run: |
