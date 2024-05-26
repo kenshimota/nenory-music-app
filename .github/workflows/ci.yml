@@ -33,7 +33,7 @@ jobs:
       - name: Install dependencies for Operative System
         run: |
           apt-get update && apt-get install -y curl libpng-dev libonig-dev libxml2-dev zip unzip |
-          docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd |
+          docker-php-ext-install pdo_mysql mysqli mbstring exif pcntl bcmath gd |
           curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
       - name: Install composer dependencies
@@ -46,6 +46,9 @@ jobs:
           php artisan key:generate
       - name: Install phpunit 
         run: composer require --dev phpunit/phpunit
+
+      - name: Show php modules
+        run: php -m 
       - name: Run migrate 
         run: php artisan migrate
       - name: Run seeds
