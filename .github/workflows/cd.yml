@@ -46,7 +46,7 @@ jobs:
           php artisan key:generate
  
       - name: Run Testsuite
-        run: vendor/bin/phpunit tests/
+        run: ./vendor/bin/phpunit tests/
 
   node-test:
     runs-on: ubuntu-latest
