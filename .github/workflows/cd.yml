@@ -44,7 +44,8 @@ jobs:
         run: |
           cp .env.ci .env
           php artisan key:generate
- 
+      - name: Install phpunit 
+        run: composer require --dev phpunit/phpunit
       - name: Run Testsuite
         run: ./vendor/bin/phpunit tests/
 
