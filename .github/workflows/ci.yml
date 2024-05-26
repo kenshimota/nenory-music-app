@@ -26,14 +26,21 @@ jobs:
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
  
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2-beta
         with:
-          fetch-depth: 1
-      
+          node-version: '18'
+          check-latest: true
+      - name: Install NPM dependencies
+        run: npm install
+      - name: Compile assets for production
+        run: npm test
+
       - name: Install dependencies for Operative System
         run: |
           apt-get update && apt-get install -y curl libpng-dev libonig-dev libxml2-dev zip unzip 
-        
+
       - name: Install PHP extensions
         run: |
           docker-php-ext-install pdo pdo_mysql mysqli mbstring exif pcntl bcmath gd
@@ -60,19 +67,3 @@ jobs:
         run: php artisan db:seed
       - name: Run Testsuite
         run: ./vendor/bin/phpunit tests/
-
-  node-test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2-beta
-        with:
-          node-version: '18'
-          check-latest: true
-      - name: Install NPM dependencies
-        run: npm install
-      - name: Compile assets for production
-        run: npm test
