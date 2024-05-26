@@ -38,7 +38,7 @@ jobs:
         run: npm test
 
       - name: Install Vite
-        run: npm run prod
+        run: npm run build
 
       - name: Install dependencies for Operative System
         run: |
