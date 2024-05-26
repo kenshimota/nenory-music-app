@@ -37,6 +37,9 @@ jobs:
       - name: Compile assets for production
         run: npm test
 
+      - name: Install Vite
+        run: npm run prod
+
       - name: Install dependencies for Operative System
         run: |
           apt-get update && apt-get install -y curl libpng-dev libonig-dev libxml2-dev zip unzip 

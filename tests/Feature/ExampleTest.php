@@ -16,6 +16,6 @@ class ExampleTest extends TestCase
         echo $response->status();
         echo $response->content();
 
-        //$response->assertStatus(200);
+        $response->assertStatus(200);
     }
 }
