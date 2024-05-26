@@ -46,6 +46,10 @@ jobs:
           php artisan key:generate
       - name: Install phpunit 
         run: composer require --dev phpunit/phpunit
+      - name: Run migrate 
+        run: php artisan migrate
+      - name: Run seeds
+        run: php artisan seed
       - name: Run Testsuite
         run: ./vendor/bin/phpunit tests/
 
