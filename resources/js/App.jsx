@@ -1,9 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
+import Button from "./components/Button";
 import Example from "./components/Example";
 
-const App = () => <Example />;
+const App = () => (
+    <>
+       <Example />
+       <Button />
+    </>
+);
 
 if (!globalThis.process || process.env.NODE_ENV !== "test") {
     window.addEventListener("load", () => {
