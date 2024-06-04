@@ -1,5 +1,7 @@
 services:
   web:
+    env_file:
+      - .env
     image: nenorymusic:1.0.0 
     build: .
     ports:
@@ -7,7 +9,7 @@ services:
       - 5174:5174
     volumes:
       - .:/var/www/html/
-    command: php artisan serve --host=0.0.0.0 --port=$PORT
+    command: sh start-server.sh
     depends_on:
       - mysql-server
     links:
