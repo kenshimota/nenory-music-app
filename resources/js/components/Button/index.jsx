@@ -3,7 +3,6 @@ import React from "react";
 
 import "./style.css";
 
-// un comentario
 const Button = ({  size, children, className, variant, ...props  }) =>  {
     className  = clsx({
         [className]: Boolean(className),
