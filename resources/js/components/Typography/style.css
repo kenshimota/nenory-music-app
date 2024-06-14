@@ -1,0 +1,62 @@
+.Tipography{
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+
+.typography-body1{
+    color: #000;
+    font-family: Montserrat;
+    font-size: 15px;
+}
+
+.typography-body2{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 15px;
+}
+
+.typography-title1{
+    color: #000;
+    font-family: "Bebas Neue";
+    font-size: 72px;
+}
+
+
+
+.typography-title2{
+    color: #000;
+    font-family: "Bebas Neue";
+    font-size: 64px;
+}
+
+.typography-title3{
+    color: #000;
+    font-family: "Bebas Neue";
+    font-size: 48px;
+
+}
+
+.typography-title4{
+    color: #000;
+    font-family: "Bebas Neue";
+    font-size: 36px;
+
+}
+
+.typography-title5{
+    color: #000;
+    font-family: "Bebas Neue";
+    font-size: 24px;
+}
+
+.typography-subtitle{
+    color: #000;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
