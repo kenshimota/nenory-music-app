@@ -38,6 +38,7 @@ const App = () => (
        <Typography variant = "subtitle">
          Titulo del cuerpo del texto
        </Typography>
+       
 
 
        <Typography variant = "body1">
