@@ -46,5 +46,9 @@ const Typography = ({ variant, component, children, className, ...props }) => {
 
     
 
-    return <Component {...props}>{children}</Component>;
+    return <Component className = {className} {...props}>{children}</Component>;
 };
+
+
+
+export default Typography;
