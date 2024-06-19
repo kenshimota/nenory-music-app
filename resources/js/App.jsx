@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 
 import Button from "./components/Button";
 import Example from "./components/Example";
+import Inputs from "./components/Inputs";
 
 const App = () => (
     <>
@@ -10,6 +11,14 @@ const App = () => (
        <Button size = "small">
         Botton
         </Button>
+
+
+
+        <Inputs variant = "primary">
+        escribe tu m
+        </Inputs>
+
+
 
 
         <Button size = "small" variant ="dark">
