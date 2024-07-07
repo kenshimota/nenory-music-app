@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\StatesController;
+use App\Http\Controllers\API\CitiesController;
+use App\Http\Controllers\API\SuppliersController;
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('signin', [AuthController::class, 'signIn']);
@@ -16,11 +19,12 @@ Route::group(['prefix' => 'auth'], function () {
     });
 });
 
-
 Route::get("roles", [RoleController::class, "index"]);
-
+Route::get("cities", [CitiesController::class, "index"]);
+Route::get("states", [StatesController::class, "index"]);
 
 Route::group([ "middleware" => ["auth:api", "auth"] ], function(){
     Route::apiResource("users",UserController::class);
+    Route::apiResource("suppliers", SuppliersController::class);
 });
 

@@ -4,7 +4,10 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\State;
+use App\Models\City;
 use Illuminate\Database\Seeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,14 +28,19 @@ class DatabaseSeeder extends Seeder
             'description' => 'Empleado'
         ]);
 
-        User::factory()->create([
-            "username" => "test",
+        User::firstOrCreate([
+            "username" => "test1",
             "name" => "Administrador",
             "last_name" => "Erik",
-            'email' => 'test@example.com',
+            'email' => 'test+1@example.com',
             "password" => "f4t1m4*H1",
-            "identity_document" => 27010169
+            "identity_document" => 656554,
+            "role_id" => Role::where('name', 'admin')->first()->id,
         ]);
+
+        $state = State::firstOrCreate(["name" => "tsate1"]);
+
+        City::firstOrCreate(["name" => "jung", "state_id" => $state->id]);
 
 
     }

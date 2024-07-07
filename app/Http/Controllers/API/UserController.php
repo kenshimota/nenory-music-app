@@ -71,7 +71,8 @@ class UserController extends Controller {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        return User::whereId($id)->update($validator);
+        User::whereId($id)->update($validator);
+        return response()->json(User::find($id), 202);
     }
 
     /**
@@ -80,5 +81,6 @@ class UserController extends Controller {
     public function destroy(string $id){
         $user = User::findOrFail($id);
         $user->delete();
+        return response()->json(null, 204);
     }
 }
