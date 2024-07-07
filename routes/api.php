@@ -2,8 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\API\ForceJsonResponse;
-use App\Http\Middleware\API\Cors;
+
+use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\AuthController;
 
 Route::group(['prefix' => 'auth'], function () {
@@ -15,6 +16,11 @@ Route::group(['prefix' => 'auth'], function () {
     });
 });
 
+
+Route::get("roles", [RoleController::class, "index"]);
+
+
 Route::group([ "middleware" => ["auth:api", "auth"] ], function(){
+    Route::apiResource("users",UserController::class);
 });
 

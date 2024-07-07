@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,6 +15,16 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        Role::firstOrCreate([ 
+            'name' => 'admin',
+            'description' => 'Administrador del Sistema'
+        ]);
+
+        Role::firstOrCreate([
+            'name' => 'employer',
+            'description' => 'Empleado'
+        ]);
+
         User::factory()->create([
             "username" => "test",
             "name" => "Administrador",
@@ -23,5 +33,7 @@ class DatabaseSeeder extends Seeder
             "password" => "f4t1m4*H1",
             "identity_document" => 27010169
         ]);
+
+
     }
 }
