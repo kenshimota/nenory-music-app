@@ -8,7 +8,8 @@
     },
     "jest": {
         "moduleNameMapper": {
-            "\\.(css|less|sass|scss)$": "jest-transform-css"
+            "\\.(css|less|sass|scss)$": "jest-transform-css",
+            "@mui/system/createStyled": "jest-transform-css"
         }
     },
     "devDependencies": {
