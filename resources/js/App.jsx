@@ -1,49 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
+import { ThemeProvider } from "@emotion/react";
 
-import Button from "./components/Button";
-import Example from "./components/Example";
+import router from "./routes";
+import useTheme from "./theme";
+import Auth from "./components/Auth";
 
-const App = () => (
-    <>
-       <Example />
-       <Button size = "small">
-        Botton
-        </Button>
+const App = () => {
+    const theme = useTheme();
 
-
-        <Button size = "small" variant ="dark">
-        Botton
-        </Button>
-
-        <Button size = "small" variant ="outlined">
-        Botton
-        </Button>
-
-
-        <Button size = "large" disabled onClick ={console.log}>
-        Botton
-        </Button>
-
-
-
-        <Button>
-        Botton
-        </Button>
-       <Button size = "large">
-        Botton
-        </Button>
-
-        <Button size = "large" variant ="dark">
-        Botton
-        </Button>
-
-        <Button size = "large" variant ="outlined">
-        Botton
-        </Button>
-    </>
-);
-
+    return (
+        <Auth>
+            <ThemeProvider theme={theme}>
+                <RouterProvider router={router} />
+            </ThemeProvider>
+        </Auth>
+    );
+};
 if (!globalThis.process || process.env.NODE_ENV !== "test") {
     window.addEventListener("load", () => {
         console.log("execute");
