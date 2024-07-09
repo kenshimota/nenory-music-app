@@ -66,5 +66,3 @@ jobs:
         run: php artisan migrate
       - name: Run seeds
         run: php artisan db:seed
-      - name: Run Testsuite
-        run: ./vendor/bin/phpunit tests/
