@@ -14,8 +14,8 @@ class AuthController extends Controller {
      */
     public function signIn(Request $request) {
         $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string'
+            'username' => 'required|string|min:6',
+            'password' => 'required|string|min:8'
         ]);
 
         $user = User::where("username", request("username"))->first();
