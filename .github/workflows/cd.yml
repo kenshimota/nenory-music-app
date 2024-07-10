@@ -13,7 +13,7 @@ jobs:
       - name: docker build
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/uptjaa-online:${{ github.sha }} .
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/uptjaa-online:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/uptjaa-online:latest .
       - name: login docker hub
         uses: docker/login-action@v3
         with:
@@ -22,4 +22,4 @@ jobs:
       - name: docker push
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/uptjaa-online:${{ github.sha }}
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/uptjaa-online:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/uptjaa-online:latest
