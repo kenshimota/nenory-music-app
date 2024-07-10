@@ -48,4 +48,4 @@ RUN npm install
 # build packages nodejs
 RUN npm run build
 
-CMD ["php", "artisan", "server"]
+CMD ["php", "artisan", "serve", "--host", "0.0.0.0"]
