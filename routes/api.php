@@ -9,6 +9,7 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\StatesController;
 use App\Http\Controllers\API\CitiesController;
 use App\Http\Controllers\API\SuppliersController;
+use App\Http\Controllers\API\PurchasesController;
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('signin', [AuthController::class, 'signIn']);
@@ -26,5 +27,6 @@ Route::get("states", [StatesController::class, "index"]);
 Route::group([ "middleware" => ["auth:api", "auth"] ], function(){
     Route::apiResource("users",UserController::class);
     Route::apiResource("suppliers", SuppliersController::class);
+    Route::apiResource("purchases", PurchasesController::class);
 });
 
