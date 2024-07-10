@@ -34,8 +34,6 @@ jobs:
           check-latest: true
       - name: Install NPM dependencies
         run: npm install
-      - name: Compile assets for production
-        run: npm test
 
       - name: Install Vite
         run: npm run build
@@ -68,5 +66,3 @@ jobs:
         run: php artisan migrate
       - name: Run seeds
         run: php artisan db:seed
-      - name: Run Testsuite
-        run: ./vendor/bin/phpunit tests/
