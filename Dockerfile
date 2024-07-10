@@ -42,4 +42,10 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # Generate the optimized autoload files
 RUN composer install --optimize-autoloader --no-dev
 
-CMD ["sleep", "infinity"]
+# install npm package
+RUN npm install
+
+# build packages nodejs
+RUN npm run build
+
+CMD ["php", "artisan", "server"]
