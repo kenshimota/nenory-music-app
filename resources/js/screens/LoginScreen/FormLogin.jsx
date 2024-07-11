@@ -58,27 +58,15 @@ const FormLogin = ({ onSave, ...props }) => {
                         name="username"
                         label="Usuario"
                         type="text"
-                        error={
-                            error &&
-                            status === 422 &&
-                            error.errors && 
-			    error.errors.username &&
-                            error.errors.username.join(",")
-                        }
+                        errors={status === 422 && error.errors}
                     />
                 </Grid>
                 <Grid item xs={12}>
                     <InputPass
                         name="password"
                         label="Contraseña"
-                        error={
-                            error &&
-                            status === 422 &&
-                            error.errors &&
-			    error.errors.password &&
-                            error.errors.password.join(",")
-                        }
-                    ></InputPass>
+                        errors={status === 422 && error.errors}
+                    />
                 </Grid>
                 {status === 401 && error && (
                     <Grid item xs={12}>
