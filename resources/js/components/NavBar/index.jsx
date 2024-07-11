@@ -52,6 +52,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         },
     },
 }));
+<<<<<<< HEAD
 // boton de hacia atras
 function BadButton() {
     const navigate = useNavigate();
@@ -70,10 +71,15 @@ function BadButton() {
 }
 
 export default function SearchAppBar({ title, isBack }) {
+=======
+
+export default function SearchAppBar() {
+>>>>>>> ca6413b (correting database)
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
+<<<<<<< HEAD
                     {!isBack && (
                         <IconButton
                             size="large"
@@ -86,6 +92,17 @@ export default function SearchAppBar({ title, isBack }) {
                         </IconButton>
                     )}
                     {isBack && <BadButton />}
+=======
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        sx={{ mr: 2 }}
+                    >
+                        <MenuIcon />
+                    </IconButton>
+>>>>>>> ca6413b (correting database)
                     <Typography
                         variant="h6"
                         noWrap
@@ -95,7 +112,11 @@ export default function SearchAppBar({ title, isBack }) {
                             display: { xs: "none", sm: "block" },
                         }}
                     >
+<<<<<<< HEAD
                         {title}
+=======
+                        Gran coffee
+>>>>>>> ca6413b (correting database)
                     </Typography>
                     <Search>
                         <SearchIconWrapper>
