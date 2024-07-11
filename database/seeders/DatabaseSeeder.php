@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             "role_id" => Role::where('name', 'admin')->first()->id,
         ]);
 
-        $state = State::firstOrCreate(["name" => "tsate1"]);
+        $state = State::firstOrCreate(["name" => "admin123"]);
 
         City::firstOrCreate(["name" => "jung", "state_id" => $state->id]);
 
