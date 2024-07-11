@@ -1,14 +1,15 @@
 import React from "react";
-
-import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+
 import { useForm } from "../Form";
 
-const Input = ({ name, onChange: change, error: r, ...props }) => {
+const Input = ({ name, onChange: change, error, errors: errs, ...props }) => {
     const formi = useForm();
     const { values, errors, handleBlur, handleChange } = formi;
     const value = values[name] || "";
-    const error = errors[name] || r || null;
+    error =
+        error || errors[name] || (errs && errs[name] && errs[name].join(","));
 
     const onChange = (e) => {
         handleChange(e);
