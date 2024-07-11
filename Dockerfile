@@ -51,4 +51,6 @@ RUN apk del curl gnupg && \
     /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts && \
     { rm -rf /root/.gnupg || true; }
 
+RUN npm install && npm run build
+
 CMD ["/start.sh"]
