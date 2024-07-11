@@ -11,6 +11,7 @@ import Form from "../../components/Form";
 import Input from "../../components/Input";
 import ButtonCommon from "../../components/ButtonCommon";
 import usePostAPI from "../../hooks/usePostAPI";
+import InputPass from "../../components/InputPass";
 
 const FormCustom = styled(Form)(({ theme }) => ({
     width: "100%",
@@ -22,14 +23,14 @@ const FormCustom = styled(Form)(({ theme }) => ({
     },
 }));
 
-const schema = yup.object().shape({
-    username: yup.string().required("El nombre de usuario es obligatorio"),
-    password: yup.string().required("La contraseña es obligatoria"),
-});
-
 const FormLogin = ({ onSave, ...props }) => {
     const { request, loading, status, error } = usePostAPI({
         url: "/auth/signin",
+    });
+
+    const schema = yup.object().shape({
+        username: yup.string().required("El nombre de usuario es obligatorio"),
+        password: yup.string().required("La contraseña es obligatoria"),
     });
 
     const onSubmit = async function (values) {
@@ -69,17 +70,16 @@ const FormLogin = ({ onSave, ...props }) => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <Input
+                    <InputPass
                         name="password"
                         label="Contraseña"
-                        type="password"
                         error={
                             error &&
                             status === 422 &&
                             error.errors &&
                             error.errors.password.join(",")
                         }
-                    />
+                    ></InputPass>
                 </Grid>
                 {status === 401 && error && (
                     <Grid item xs={12}>
