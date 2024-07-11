@@ -49,8 +49,6 @@ class AuthController extends Controller {
         ]);
     }
 
-
-
     /**
      * Cierre de sesión y eliminación del token
      *
