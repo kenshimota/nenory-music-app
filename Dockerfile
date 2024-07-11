@@ -17,49 +17,38 @@ ENV LOG_CHANNEL stderr
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-# Install dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip 
 
-# install dependencies to node 20
-RUN apt install -y ca-certificates curl gnupg && \
-    mkdir -p /etc/apt/keyrings && \
-    curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+ENV VERSION=v20.1.0 NPM_VERSION=9 YARN_VERSION=v1.22.19
 
-# add repository node 20
-RUN NODE_MAJOR=20 &&\
-    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list &&\
-    apt update
+RUN apk upgrade --no-cache -U && \
+    apk add --no-cache curl gnupg libstdc++
 
-# install node 20
-RUN apt install gcc g++ make nodejs -y
+RUN curl -sfSLO https://unofficial-builds.nodejs.org/download/release/${VERSION}/node-${VERSION}-linux-x64-musl.tar.xz && \
+    curl -sfSLO https://unofficial-builds.nodejs.org/download/release/${VERSION}/SHASUMS256.txt && \
+    grep " node-${VERSION}-linux-x64-musl.tar.xz\$" SHASUMS256.txt | sha256sum -c | grep ': OK$' && \
+    tar -xf node-${VERSION}-linux-x64-musl.tar.xz -C /usr --strip 1 && \
+    rm node-${VERSION}-linux-x64-musl.tar.xz
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN npm install -g npm@${NPM_VERSION} && \
+    find /usr/lib/node_modules/npm -type d \( -name test -o -name .bin \) | xargs rm -rf
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN for server in hkps://keys.openpgp.org ipv4.pool.sks-keyservers.net keyserver.pgp.com ha.pool.sks-keyservers.net; do \
+    gpg --keyserver $server --recv-keys \
+    6A010C5166006599AA17F08146C2130DFD2497F5 && break; \
+    done && \
+    curl -sfSL -O https://github.com/yarnpkg/yarn/releases/download/${YARN_VERSION}/yarn-${YARN_VERSION}.tar.gz -O https://github.com/yarnpkg/yarn/releases/download/${YARN_VERSION}/yarn-${YARN_VERSION}.tar.gz.asc && \
+    gpg --batch --verify yarn-${YARN_VERSION}.tar.gz.asc yarn-${YARN_VERSION}.tar.gz && \
+    mkdir /usr/local/share/yarn && \
+    tar -xf yarn-${YARN_VERSION}.tar.gz -C /usr/local/share/yarn --strip 1 && \
+    ln -s /usr/local/share/yarn/bin/yarn /usr/local/bin/ && \
+    ln -s /usr/local/share/yarn/bin/yarnpkg /usr/local/bin/ && \
+    rm yarn-${YARN_VERSION}.tar.gz*
 
-# Copy the application files to the container
-COPY . .
-
-# Set the appropriate permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-# Generate the optimized autoload files
-RUN composer install --optimize-autoloader --no-dev
-
-# install npm package
-RUN npm install
-
-# build packages nodejs
-RUN npm run build
+RUN apk del curl gnupg && \
+    rm -rf /SHASUMS256.txt /tmp/* \
+    /usr/share/man/* /usr/share/doc /root/.npm /root/.node-gyp /root/.config \
+    /usr/lib/node_modules/npm/man /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/docs \
+    /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts && \
+    { rm -rf /root/.gnupg || true; }
 
 CMD ["/start.sh"]
-
