@@ -15,3 +15,6 @@ php artisan migrate --force
 
 echo "Seed"
 php artisan db:seed --force --class=DatabaseSeeder
+
+echo "Creating Personal Access Token"
+php artisan passport:client --personal --no-interaction

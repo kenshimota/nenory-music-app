@@ -2,7 +2,7 @@ services:
   web:
     env_file:
       - .env
-    image: nenorymusic:1.0.0 
+    image: kenshimota/nenory-inventory:latest
     build: .
     ports:
       - 8000:80

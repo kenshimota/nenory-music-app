@@ -53,5 +53,4 @@ RUN apk del curl gnupg && \
 
 RUN npm install && npm run build
 
-
 CMD ["/start.sh"]
