@@ -1,6 +1,7 @@
 import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
+import InputSearch from "../../components/InputSearch";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -8,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import SearchIcon from "@mui/icons-material/Search";
+
 import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
@@ -52,7 +53,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         },
     },
 }));
-<<<<<<< HEAD
 // boton de hacia atras
 function BadButton() {
     const navigate = useNavigate();
@@ -71,15 +71,10 @@ function BadButton() {
 }
 
 export default function SearchAppBar({ title, isBack }) {
-=======
-
-export default function SearchAppBar() {
->>>>>>> ca6413b (correting database)
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-<<<<<<< HEAD
                     {!isBack && (
                         <IconButton
                             size="large"
@@ -92,17 +87,6 @@ export default function SearchAppBar() {
                         </IconButton>
                     )}
                     {isBack && <BadButton />}
-=======
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
->>>>>>> ca6413b (correting database)
                     <Typography
                         variant="h6"
                         noWrap
@@ -112,21 +96,9 @@ export default function SearchAppBar() {
                             display: { xs: "none", sm: "block" },
                         }}
                     >
-<<<<<<< HEAD
                         {title}
-=======
-                        Gran coffee
->>>>>>> ca6413b (correting database)
                     </Typography>
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ "aria-label": "search" }}
-                        />
-                    </Search>
+                    <InputSearch />
                 </Toolbar>
             </AppBar>
         </Box>
