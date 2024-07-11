@@ -41,6 +41,7 @@ class UserController extends Controller {
             'role_id' => ['required','exists:roles,id']
         ]);
 
+
         if (!is_array($validator) &&  $validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
