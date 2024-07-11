@@ -1,13 +1,14 @@
 import PropTypes from "prop-types";
 import React, { useContext, createContext, useEffect, useState } from "react";
 import useGetAPI from "../../hooks/useGetAPI";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 const AuthContext = createContext(null);
 
 export const useAuth = () => useContext(AuthContext);
 
 const AuthProvider = ({ children }) => {
-    const [session, setSession] = useState(null);
+    const [session, setSession] = useLocalStorage(null);
     const [currentUser, setCurrentUser] = useState(null);
     const { request } = useGetAPI({ url: "/auth/me" });
 
