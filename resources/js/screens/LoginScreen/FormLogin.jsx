@@ -15,7 +15,6 @@ import usePostAPI from "../../hooks/usePostAPI";
 const FormCustom = styled(Form)(({ theme }) => ({
     width: "100%",
     maxWidth: 300,
-    padding: theme.spacing(2),
     padding: theme.spacing(1),
     [theme.breakpoints.down("sm")]: {
         maxWidth: "auto",
@@ -45,8 +44,6 @@ const FormLogin = ({ onSave, ...props }) => {
         }
     };
 
-    console.log({ error, status });
-
     return (
         <FormCustom disabled={loading} schema={schema} onSubmit={onSubmit}>
             <Grid container spacing={1} justifyContent="center">
@@ -63,7 +60,8 @@ const FormLogin = ({ onSave, ...props }) => {
                         error={
                             error &&
                             status === 422 &&
-                            error.errors &&
+                            error.errors && 
+			    error.errors.username &&
                             error.errors.username.join(",")
                         }
                     />
@@ -77,6 +75,7 @@ const FormLogin = ({ onSave, ...props }) => {
                             error &&
                             status === 422 &&
                             error.errors &&
+			    error.errors.password &&
                             error.errors.password.join(",")
                         }
                     />
