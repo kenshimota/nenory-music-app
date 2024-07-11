@@ -35,6 +35,7 @@
         "@emotion/styled": "^11.11.5",
         "@mui/icons-material": "^5.16.0",
         "@mui/material": "^5.16.0",
+        "@uidotdev/usehooks": "^2.4.1",
         "clsx": "^2.1.1",
         "formik": "^2.4.6",
         "install": "^0.13.0",

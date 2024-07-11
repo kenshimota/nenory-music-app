@@ -1,17 +1,14 @@
 import React from "react";
 import { Grid, styled } from "@mui/material";
 import NavBar from "../../components/NavBar";
-import ButtonMenu from "../../screens/HomeScreen/ButtonMenu";
-
+// hola
 const GridContainer = styled(Grid)(({ theme }) => ({}));
-
-const HomeScreen = (props) => {
+const UsersScreen = (props) => {
     return (
         <GridContainer container spacing={1}>
-            <NavBar title={"Gran Coffee"} />
-            <ButtonMenu />
+            <NavBar title={"Usuarios"} isBack />
         </GridContainer>
     );
 };
 
-export default HomeScreen;
+export default UsersScreen;
