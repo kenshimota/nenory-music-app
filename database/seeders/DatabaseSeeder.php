@@ -29,12 +29,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::firstOrCreate([
-            "username" => "jessica",
-            "name" => "Administrador",
-            "last_name" => "Erik",
-            'email' => 'test+2@example.com',
+            "username" => "administrator",
+            "name" => "Testing1",
+            "last_name" => "Testing2",
+            'email' => 'test+3@example.com',
             "password" => "manager1234",
-            "identity_document" => 6565541,
+            "identity_document" => 6565542,
             "role_id" => Role::where('name', 'admin')->first()->id,
         ]);
 

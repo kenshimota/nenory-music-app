@@ -5,10 +5,14 @@ composer install --no-dev --working-dir=/var/www/html
 chmod -R 777 ./storage/
 
 # echo "Caching config..."
-# php artisan config:cache
+php artisan config:cache
 
 # echo "Caching routes..."
-# php artisan route:cache
+php artisan route:cache
+
+if [ "$APP_ENV" = "production" ]; then
+    php artisan db:wipe --force
+end
 
 echo "Running migrations..."
 php artisan migrate --force
