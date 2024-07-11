@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+echo "Composer Install..." 
+composer install --no-dev --working-dir=/var/www/html 
+chown www-data:www-data -R ./storage
+
 echo "Caching config..."
 php artisan config:cache
 
@@ -8,3 +12,6 @@ php artisan route:cache
 
 echo "Running migrations..."
 php artisan migrate 
+
+echo "Seed"
+php artisan db:seed --class=DatabaseSeeder
