@@ -8,7 +8,7 @@ const GridContainer = styled(Grid)(({ theme }) => ({}));
 const HomeScreen = (props) => {
     return (
         <GridContainer container spacing={1}>
-            <NavBar />
+            <NavBar title={"Gran Coffee"} />
             <ButtonMenu />
         </GridContainer>
     );

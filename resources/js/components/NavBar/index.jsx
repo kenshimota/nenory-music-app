@@ -7,7 +7,9 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
     position: "relative",
@@ -50,21 +52,40 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         },
     },
 }));
+// boton de hacia atras
+function BadButton() {
+    const navigate = useNavigate();
+    const handleGoBack = () => {
+        navigate(-1); // Echar para atrás en la navegación
+    };
+    return (
+        <IconButton
+            onClick={handleGoBack}
+            aria-label="ArrowBackIos"
+            size="large"
+        >
+            <ArrowBackIosIcon fontSize="inherit" />
+        </IconButton>
+    );
+}
 
-export default function SearchAppBar() {
+export default function SearchAppBar({ title, isBack }) {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
+                    {!isBack && (
+                        <IconButton
+                            size="large"
+                            edge="start"
+                            color="inherit"
+                            aria-label="open drawer"
+                            sx={{ mr: 2 }}
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                    )}
+                    {isBack && <BadButton />}
                     <Typography
                         variant="h6"
                         noWrap
@@ -74,7 +95,7 @@ export default function SearchAppBar() {
                             display: { xs: "none", sm: "block" },
                         }}
                     >
-                        Gran coffee
+                        {title}
                     </Typography>
                     <Search>
                         <SearchIconWrapper>
