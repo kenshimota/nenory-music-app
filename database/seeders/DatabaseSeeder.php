@@ -29,16 +29,16 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::firstOrCreate([
-            "username" => "test1",
-            "name" => "Administrador",
-            "last_name" => "Erik",
-            'email' => 'test+1@example.com',
-            "password" => "f4t1m4*H1",
-            "identity_document" => 656554,
+            "username" => "admin123",
+            "name" => "Administradorr",
+            "last_name" => "Eriku",
+            'email' => 'admin@example.com',
+            "password" => "12345678",
+            "identity_document" => 6565543,
             "role_id" => Role::where('name', 'admin')->first()->id,
         ]);
 
-        $state = State::firstOrCreate(["name" => "tsate1"]);
+        $state = State::firstOrCreate(["name" => "admin123"]);
 
         City::firstOrCreate(["name" => "jung", "state_id" => $state->id]);
 
