@@ -73,7 +73,6 @@ class SuppliersController extends Controller {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-       
         $supplier = Supplier::whereId($id)->update($validator);
         return response()->json(Supplier::find($id), 202);
     }

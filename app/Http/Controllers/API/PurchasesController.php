@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Purchase;
-use Faker\Core\Number;
 
 class PurchasesController extends Controller
 {
