@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-
 echo "Composer Install..." 
 composer install --no-dev --working-dir=/var/www/html 
-chmod -R 777 /var/www/html/storage/
 
 # echo "Caching config..."
 php artisan config:cache
@@ -22,3 +20,6 @@ php artisan db:seed --force --class=DatabaseSeeder
 echo "Creating Personal Access Token"
 php artisan passport:keys --force
 php artisan passport:client --personal --no-interaction
+
+echo "Changing Permissions"
+chmod -R 777 /var/www/html/storage/
