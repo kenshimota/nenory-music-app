@@ -1,5 +1,5 @@
 <?php
-init_set("memory_limit", "512M");
+ini_set("memory_limit", "512M");
 
 use Illuminate\Http\Request;
 
