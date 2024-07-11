@@ -53,4 +53,8 @@ RUN apk del curl gnupg && \
 
 RUN npm install && npm run build
 
+RUN echo "Composer Install..." \
+    composer install --no-dev --working-dir=/var/www/html \
+    chown www-data:www-data -R ./storage
+
 CMD ["/start.sh"]

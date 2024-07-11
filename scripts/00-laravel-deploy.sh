@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-# composer install
-echo "Composer Install..."
-composer install --no-dev --working-dir=/var/www/html
-chown www-data:www-data -R ./storage
-
 echo "Caching config..."
 php artisan config:cache
 
