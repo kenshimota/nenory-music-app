@@ -2,13 +2,13 @@
 
 echo "Composer Install..." 
 composer install --no-dev --working-dir=/var/www/html 
-chown www-data:www-data -R ./storage
+chmod -R 777 ./storage/
 
-echo "Caching config..."
-php artisan config:cache
+# echo "Caching config..."
+# php artisan config:cache
 
-echo "Caching routes..."
-php artisan route:cache
+# echo "Caching routes..."
+# php artisan route:cache
 
 echo "Running migrations..."
 php artisan migrate --force
