@@ -53,4 +53,13 @@ RUN apk del curl gnupg && \
 
 RUN npm install && npm run build
 
+RUN echo "Composer Install..." \
+    && composer install --no-dev --working-dir=/var/www/html 
+
+RUN echo "Caching config..." \
+    && php artisan config:cache
+
+RUN echo "Caching routes..." \ 
+    && php artisan route:cache
+
 CMD ["/start.sh"]
