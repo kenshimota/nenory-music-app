@@ -23,3 +23,18 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/nenory-inventory:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USERNAME }}/nenory-inventory:latest
+      - name: deploy
+        run: |
+          apt-get update && apt-get install curl -y
+          curl 'https://api.render.com/deploy/${{ secrets.RENDER_INSTANCE }}?key=${{ secrets.RENDER_KEY }}' \
+            -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+            -H 'accept-language: es-ES,es;q=0.9,en;q=0.8,pt;q=0.7' \
+            -H 'cache-control: max-age=0' \
+            -H 'cookie: _gcl_au=1.1.1031067959.1720636207; cb_group_id=null; cb_anonymous_id=%22c9fd9fac-70e6-4942-a4e0-f2cd34ab84a7%22; ajs_anonymous_id=030cef2b-6dde-4ced-b978-109d2b7bc38c; ko_id=59ff81c1-86da-49ca-a8fc-1f6db21f01ee; _gid=GA1.2.880598122.1720636213; ajs_user_id=usr-cgtlngiut4mcfrmc9oeg; __render=%7B%22originalReferrer%22%3A%22%22%2C%22id%22%3A%22usr-cgtlngiut4mcfrmc9oeg%22%7D; cb_user_id=%22usr-cgtlngiut4mcfrmc9oeg%22; _rdt_uuid=1720636207532.a787edf4-85b7-4ef4-ab9b-b5113fd64d3e; ko_sid={%22id%22:%221720752067592%22%2C%22lastTouched%22:1720752071578}; render-theme=dark; __cf_bm=Ipehnv2TPqrYgu6UaR7uOWojqPABe7WachsbSYmp8q4-1720806078-1.0.1.1-zT06bi1r9Bv80X5gQtRFH8MCPdSxogRPNp69vD7clvOa73pQETN7wwNV8Y_9SG6wf9NmzboCDs17vn39dbin2w; _ga_QK9L9QJC5N=GS1.1.1720805643.19.1.1720806247.60.0.0; _ga=GA1.2.1534997114.1720636207; _gat=1' \
+            -H 'priority: u=0, i' \
+            -H 'sec-fetch-dest: document' \
+            -H 'sec-fetch-mode: navigate' \
+            -H 'sec-fetch-site: none' \
+            -H 'sec-fetch-user: ?1' \
+            -H 'upgrade-insecure-requests: 1' \
+            -H 'user-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1'
