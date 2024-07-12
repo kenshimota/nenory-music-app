@@ -4,12 +4,20 @@ import FormControl from "@mui/material/FormControl";
 
 import { useForm } from "../Form";
 
-const Input = ({ name, onChange: change, error, errors: errs, ...props }) => {
+const Input = ({
+    name,
+    onChange: change,
+    error,
+    errors: errs,
+    disabled,
+    ...props
+}) => {
     const formi = useForm();
-    const { values, errors, handleBlur, handleChange } = formi;
+    const { values, errors, handleBlur, disabled: d, handleChange } = formi;
     const value = values[name] || "";
     error =
         error || errors[name] || (errs && errs[name] && errs[name].join(","));
+    disabled = disabled || d;
 
     const onChange = (e) => {
         handleChange(e);
@@ -28,6 +36,7 @@ const Input = ({ name, onChange: change, error, errors: errs, ...props }) => {
                 onBlur={handleBlur}
                 error={error && Boolean(error)}
                 helperText={error}
+                disabled={disabled}
                 {...props}
             />
         </FormControl>
