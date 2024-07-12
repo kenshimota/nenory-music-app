@@ -2,14 +2,20 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 
 import HomeScreen from "../screens/HomeScreen";
+import UsersScreen from "../screens/UsersScreen";
 import RouterUser from "../components/RouteUser";
 import LoginScreen from "../screens/LoginScreen/index";
 import RouterWithoutSession from "../components/RouteWithoutSession";
+import SignUpScreen from "../screens/SignUpScreen";
 
 const routerUser = [
     {
         path: "/",
         element: <HomeScreen />,
+    },
+    {
+        path: "/users",
+        element: <UsersScreen />,
     },
 ]
     .map((route) => ({
@@ -24,7 +30,7 @@ const routerUser = [
 const routerPublic = [
     {
         path: "/login",
-        element: <LoginScreen />,
+        element: <SignUpScreen />,
     },
 ]
     .map((route) => ({

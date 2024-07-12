@@ -25,8 +25,15 @@ const AuthProvider = ({ children }) => {
         setCurrentUser(res);
     };
 
+    const clearToken = () => {
+        setSession(null);
+        setCurrentUser(null);
+    };
+
     return (
-        <AuthContext.Provider value={{ session, currentUser, setToken }}>
+        <AuthContext.Provider
+            value={{ session, currentUser, setToken, setSession, clearToken }}
+        >
             {children}
         </AuthContext.Provider>
     );
