@@ -7,10 +7,12 @@ const GridContainer = styled(Grid)(({ theme }) => ({}));
 
 const HomeScreen = (props) => {
     return (
-        <GridContainer container spacing={1}>
+        <React.Fragment>
             <NavBar title={"Gran Coffee"} />
-            <ButtonMenu />
-        </GridContainer>
+            <GridContainer container spacing={1}>
+                <ButtonMenu />
+            </GridContainer>
+        </React.Fragment>
     );
 };
 
