@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
-echo "Composer Install..." 
-composer install --no-dev --working-dir=/var/www/html 
 
-# echo "Caching config..."
-php artisan config:cache
-
-# echo "Caching routes..."
-php artisan route:cache
-
-# drop all tables before
+echo drop all tables before
 php artisan db:wipe --force
 
 echo "Running migrations..."
