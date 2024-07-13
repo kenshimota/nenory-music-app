@@ -14,6 +14,7 @@ const themes = {
             h3: { fontFamily: "Bebas Neue" },
             h4: { fontFamily: "Bebas Neue" },
             h5: { fontFamily: "Bebas Neue" },
+            h6: { fontFamily: "Bebas Neue" },
         },
         palette: {
             primary: {
@@ -64,8 +65,6 @@ const useTheme = () => {
             setThemeOs(newTheme);
         });
     }, []);
-
-    console.log(themeOs);
 
     return createTheme(theme);
 };

@@ -104,7 +104,6 @@ const FormSignup = ({ onSave, ...props }) => {
                     <Input
                         name="email"
                         label="Correo electronico"
-                        type="email"
                         errors={status === 422 && error.errors}
                     />
                 </Grid>
