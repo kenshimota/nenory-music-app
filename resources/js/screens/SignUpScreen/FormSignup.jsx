@@ -2,17 +2,18 @@ import * as yup from "yup";
 import React from "react";
 
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 import styled from "@mui/material/styles/styled";
+import Typography from "@mui/material/Typography";
+import { Link as NodeLink } from "react-router-dom";
 
 import SendIcon from "@mui/icons-material/Send";
 
 import Form from "../../components/Form";
 import Input from "../../components/Input";
-import ButtonCommon from "../../components/ButtonCommon";
 import usePostAPI from "../../hooks/usePostAPI";
 import InputPass from "../../components/InputPass";
-import SelectRole from "../../components/SelectRole";
+import ButtonCommon from "../../components/ButtonCommon";
 
 const FormCustom = styled(Form)(({ theme }) => ({
     width: "100%",
@@ -23,21 +24,21 @@ const FormCustom = styled(Form)(({ theme }) => ({
     },
 }));
 
+const schema = yup.object().shape({
+    username: yup.string().required("El campo es requerido"),
+    password: yup.string().required("El campo es requerido"),
+    email: yup.string().required("El campo es requerido"),
+    last_name: yup.string().required("El campo es requerido"),
+    name: yup.string().required("El campo es requerido"),
+    identity_document: yup
+        .number()
+        .positive("el valor ingresado debe de ser positivo")
+        .required("El campo es requerido"),
+});
+
 const FormSignup = ({ onSave, ...props }) => {
     const { request, loading, status, error } = usePostAPI({
         url: "/auth/signup",
-    });
-
-    const schema = yup.object().shape({
-        username: yup.string().required("El campo es requerido"),
-        password: yup.string().required("El campo es requerido"),
-        email: yup.string().required("El campo es requerido"),
-        last_name: yup.string().required("El campo es requerido"),
-        name: yup.string().required("El campo es requerido"),
-        identity_document: yup
-            .number()
-            .positive("el valor ingresado debe de ser positivo")
-            .required("El campo es requerido"),
     });
 
     const onSubmit = async function (values) {
@@ -45,8 +46,6 @@ const FormSignup = ({ onSave, ...props }) => {
         if (!res) {
             return;
         }
-
-        console.log(res);
 
         if (onSave) {
             onSave(res);
@@ -58,6 +57,14 @@ const FormSignup = ({ onSave, ...props }) => {
                 <Grid item xs={12}>
                     <Typography variant="h5" align="center">
                         Registrar un usuario
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography variant="body2">
+                        ¿Ya tienes una cuenta?{" "}
+                        <Link component={NodeLink} to="/login">
+                            Inicia sesión
+                        </Link>
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
