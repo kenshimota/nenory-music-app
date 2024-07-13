@@ -12,24 +12,20 @@ import Input from "../../components/Input";
 import ButtonCommon from "../../components/ButtonCommon";
 import usePostAPI from "../../hooks/usePostAPI";
 import InputPass from "../../components/InputPass";
+import SelectRole from "../../components/SelectRole";
 
 const FormCustom = styled(Form)(({ theme }) => ({
     width: "100%",
-    maxWidth: 300,
+    maxWidth: 370,
     padding: theme.spacing(1),
     [theme.breakpoints.down("sm")]: {
         maxWidth: "auto",
     },
 }));
 
-const FormLogin = ({ onSave, ...props }) => {
+const FormSignup = ({ onSave, ...props }) => {
     const { request, loading, status, error } = usePostAPI({
         url: "/auth/signin",
-    });
-
-    const schema = yup.object().shape({
-        username: yup.string().required("El nombre de usuario es obligatorio"),
-        password: yup.string().required("La contraseña es obligatoria"),
     });
 
     const onSubmit = async function (values) {
@@ -44,13 +40,12 @@ const FormLogin = ({ onSave, ...props }) => {
             onSave(res);
         }
     };
-
     return (
-        <FormCustom disabled={loading} schema={schema} onSubmit={onSubmit}>
+        <FormCustom disabled={loading} onSubmit={onSubmit}>
             <Grid container spacing={1} justifyContent="center">
                 <Grid item xs={12}>
                     <Typography variant="h5" align="center">
-                        Inicia Sesión
+                        Registrar un usuario
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -62,28 +57,58 @@ const FormLogin = ({ onSave, ...props }) => {
                     />
                 </Grid>
                 <Grid item xs={12}>
+                    <Input
+                        name="name"
+                        label="Nombre"
+                        type="text"
+                        errors={status === 422 && error.errors}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Input
+                        name="last_name"
+                        label="Apellido"
+                        type="text"
+                        errors={status === 422 && error.errors}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Input
+                        name="email"
+                        label="Correo electronico"
+                        type="email"
+                        errors={status === 422 && error.errors}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <Input
+                        name="identity_document"
+                        label="Cedula de Identidad"
+                        type="text"
+                        errors={status === 422 && error.errors}
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <SelectRole
+                        name="role_id"
+                        errors={status === 422 && error.errors}
+                    ></SelectRole>
+                </Grid>
+                <Grid item xs={12}>
                     <InputPass
                         name="password"
                         label="Contraseña"
                         errors={status === 422 && error.errors}
                     />
                 </Grid>
-                {status == 401 && (
+                {status == 401 && error && (
                     <Grid item xs={12}>
                         <Typography variant="body2" color="error">
-                            Lo siento no puede iniciar sesión, El usuario o la
-                            contraseña son incorrectos
+                            Lo siento hubo un error y no se pudo registrar
+                            verifique que todos los campos estan correctos
                         </Typography>
                     </Grid>
                 )}{" "}
-                {status == 500 && error && (
-                    <Grid item xs={12}>
-                        <Typography variant="body2" color="error">
-                            Ha ocurrido un error inhesperado, por favor contacte
-                            al proveedor
-                        </Typography>
-                    </Grid>
-                )}
                 {status == 500 && error && (
                     <Grid item xs={12}>
                         <Typography variant="body2" color="error">
@@ -96,10 +121,9 @@ const FormLogin = ({ onSave, ...props }) => {
                     <ButtonCommon
                         type="submit"
                         fullWidth
-                        loading={loading}
                         endIcon={<SendIcon />}
                     >
-                        Entrar
+                        Registrarte
                     </ButtonCommon>
                 </Grid>
             </Grid>
@@ -107,4 +131,4 @@ const FormLogin = ({ onSave, ...props }) => {
     );
 };
 
-export default FormLogin;
+export default FormSignup;
