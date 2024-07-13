@@ -24,14 +24,20 @@ const FormCustom = styled(Form)(({ theme }) => ({
     },
 }));
 
+const schema = yup.object().shape({
+    username: yup
+        .string()
+        .min(6, "El usuario debe tener al menos 6 caracteres")
+        .required("El nombre de usuario es obligatorio"),
+    password: yup
+        .string()
+        .min(8, "la contraseña debe tener al menos 8 caracteres")
+        .required("La contraseña es obligatoria"),
+});
+
 const FormLogin = ({ onSave, ...props }) => {
     const { request, loading, status, error } = usePostAPI({
         url: "/auth/signin",
-    });
-
-    const schema = yup.object().shape({
-        username: yup.string().required("El nombre de usuario es obligatorio"),
-        password: yup.string().required("La contraseña es obligatoria"),
     });
 
     const onSubmit = async function (values) {

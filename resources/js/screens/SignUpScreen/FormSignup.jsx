@@ -25,8 +25,14 @@ const FormCustom = styled(Form)(({ theme }) => ({
 }));
 
 const schema = yup.object().shape({
-    username: yup.string().required("El campo es requerido"),
-    password: yup.string().required("El campo es requerido"),
+    username: yup
+        .string()
+        .min(6, "El usuario debe tener al menos 6 caracteres")
+        .required("El campo es requerido"),
+    password: yup
+        .string()
+        .min(8, "La contraseña debe tener al menos 8 caracteres")
+        .required("El campo es requerido"),
     email: yup.string().required("El campo es requerido"),
     last_name: yup.string().required("El campo es requerido"),
     name: yup.string().required("El campo es requerido"),
