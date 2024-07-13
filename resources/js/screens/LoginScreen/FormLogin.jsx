@@ -68,7 +68,7 @@ const FormLogin = ({ onSave, ...props }) => {
                         errors={status === 422 && error.errors}
                     />
                 </Grid>
-                {status == 401 && error && (
+                {status == 401 && (
                     <Grid item xs={12}>
                         <Typography variant="body2" color="error">
                             Lo siento no puede iniciar sesión, El usuario o la
@@ -84,10 +84,19 @@ const FormLogin = ({ onSave, ...props }) => {
                         </Typography>
                     </Grid>
                 )}
+                {status == 500 && error && (
+                    <Grid item xs={12}>
+                        <Typography variant="body2" color="error">
+                            Ha ocurrido un error inhesperado, por favor contacte
+                            al proveedor
+                        </Typography>
+                    </Grid>
+                )}
                 <Grid item xs={12}>
                     <ButtonCommon
                         type="submit"
                         fullWidth
+                        loading={loading}
                         endIcon={<SendIcon />}
                     >
                         Entrar
