@@ -7,6 +7,7 @@ import RouterUser from "../components/RouteUser";
 import LoginScreen from "../screens/LoginScreen/index";
 import RouterWithoutSession from "../components/RouteWithoutSession";
 import SignUpScreen from "../screens/SignUpScreen";
+import { element } from "prop-types";
 
 const routerUser = [
     {
@@ -30,6 +31,10 @@ const routerUser = [
 const routerPublic = [
     {
         path: "/login",
+        element: <LoginScreen />,
+    },
+    {
+        path: "/signup",
         element: <SignUpScreen />,
     },
 ]
