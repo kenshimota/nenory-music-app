@@ -33,7 +33,7 @@ const schema = yup.object().shape({
         .string()
         .min(8, "La contraseña debe tener al menos 8 caracteres")
         .required("El campo es requerido"),
-    email: yup.string().required("El campo es requerido"),
+    email: yup.string().email().required("El campo es requerido"),
     last_name: yup.string().required("El campo es requerido"),
     name: yup.string().required("El campo es requerido"),
     identity_document: yup
