@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { createTheme } from "@mui/material/styles";
 
+const buttons = {
+    fontFamily: "Montserrat",
+    textTransform: "uppercase",
+};
+
 const themes = {
     default: {
         typography: {
@@ -9,11 +14,6 @@ const themes = {
             h3: { fontFamily: "Bebas Neue" },
             h4: { fontFamily: "Bebas Neue" },
             h5: { fontFamily: "Bebas Neue" },
-
-            button: {
-                fontFamily: "Montserrat",
-                textTransform: "uppercase",
-            },
         },
         palette: {
             primary: {
@@ -27,6 +27,7 @@ const themes = {
             default: "#F1F1F1",
             paper: "#fff",
         },
+        button: { ...buttons, color: "#fff" },
     },
 
     dark: {
@@ -34,6 +35,8 @@ const themes = {
             default: "#111",
             paper: "#666",
         },
+
+        button: { ...buttons, color: "#333" },
     },
 };
 
