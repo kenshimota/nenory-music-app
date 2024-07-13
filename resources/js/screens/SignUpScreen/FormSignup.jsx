@@ -12,7 +12,6 @@ import Input from "../../components/Input";
 import ButtonCommon from "../../components/ButtonCommon";
 import usePostAPI from "../../hooks/usePostAPI";
 import InputPass from "../../components/InputPass";
-import SelectRole from "../../components/SelectRole";
 
 const FormCustom = styled(Form)(({ theme }) => ({
     width: "100%",
@@ -31,7 +30,7 @@ const FormSignup = ({ onSave, ...props }) => {
     const schema = yup.object().shape({
         username: yup.string().required("El campo es requerido"),
         password: yup.string().required("El campo es requerido"),
-        email: yup.string().required("El campo es requerido"),
+        email: yup.string().email().required("El campo es requerido"),
         last_name: yup.string().required("El campo es requerido"),
         name: yup.string().required("El campo es requerido"),
         identity_document: yup
