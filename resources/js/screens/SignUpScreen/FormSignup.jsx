@@ -25,7 +25,7 @@ const FormCustom = styled(Form)(({ theme }) => ({
 
 const FormSignup = ({ onSave, ...props }) => {
     const { request, loading, status, error } = usePostAPI({
-        url: "/auth/signin",
+        url: "/auth/signup",
     });
 
     const onSubmit = async function (values) {
@@ -87,12 +87,6 @@ const FormSignup = ({ onSave, ...props }) => {
                         type="text"
                         errors={status === 422 && error.errors}
                     />
-                </Grid>
-                <Grid item xs={12}>
-                    <SelectRole
-                        name="role_id"
-                        errors={status === 422 && error.errors}
-                    ></SelectRole>
                 </Grid>
                 <Grid item xs={12}>
                     <InputPass
