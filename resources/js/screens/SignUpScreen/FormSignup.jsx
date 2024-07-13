@@ -28,6 +28,18 @@ const FormSignup = ({ onSave, ...props }) => {
         url: "/auth/signup",
     });
 
+    const schema = yup.object().shape({
+        username: yup.string().required("El campo es requerido"),
+        password: yup.string().required("El campo es requerido"),
+        email: yup.string().required("El campo es requerido"),
+        last_name: yup.string().required("El campo es requerido"),
+        name: yup.string().required("El campo es requerido"),
+        identity_document: yup
+            .number()
+            .positive("el valor ingresado debe de ser positivo")
+            .required("El campo es requerido"),
+    });
+
     const onSubmit = async function (values) {
         const res = await request(values);
         if (!res) {
@@ -41,7 +53,7 @@ const FormSignup = ({ onSave, ...props }) => {
         }
     };
     return (
-        <FormCustom disabled={loading} onSubmit={onSubmit}>
+        <FormCustom disabled={loading} schema={schema} onSubmit={onSubmit}>
             <Grid container spacing={1} justifyContent="center">
                 <Grid item xs={12}>
                     <Typography variant="h5" align="center">
@@ -83,8 +95,8 @@ const FormSignup = ({ onSave, ...props }) => {
                 <Grid item xs={12}>
                     <Input
                         name="identity_document"
-                        label="Cedula de Identidad"
-                        type="text"
+                        label="Cédula de Identidad"
+                        type="number"
                         errors={status === 422 && error.errors}
                     />
                 </Grid>
