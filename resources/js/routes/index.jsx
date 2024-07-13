@@ -6,6 +6,7 @@ import UsersScreen from "../screens/UsersScreen";
 import RouterUser from "../components/RouteUser";
 import LoginScreen from "../screens/LoginScreen/index";
 import RouterWithoutSession from "../components/RouteWithoutSession";
+import SignUpScreen from "../screens/SignUpScreen";
 
 const routerUser = [
     {
@@ -29,7 +30,7 @@ const routerUser = [
 const routerPublic = [
     {
         path: "/login",
-        element: <LoginScreen />,
+        element: <SignUpScreen />,
     },
 ]
     .map((route) => ({
