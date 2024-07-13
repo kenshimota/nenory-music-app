@@ -4,10 +4,10 @@ import { createBrowserRouter } from "react-router-dom";
 import HomeScreen from "../screens/HomeScreen";
 import UsersScreen from "../screens/UsersScreen";
 import RouterUser from "../components/RouteUser";
-import LoginScreen from "../screens/LoginScreen/index";
-import RouterWithoutSession from "../components/RouteWithoutSession";
 import SignUpScreen from "../screens/SignUpScreen";
-import { element } from "prop-types";
+import LoginScreen from "../screens/LoginScreen/index";
+import ForgetPasswordScreen from "../screens/ForgetPasswordScreen";
+import RouterWithoutSession from "../components/RouteWithoutSession";
 
 const routerUser = [
     {
@@ -32,6 +32,10 @@ const routerPublic = [
     {
         path: "/login",
         element: <LoginScreen />,
+    },
+    {
+        path: "/forget-password",
+        element: <ForgetPasswordScreen />,
     },
     {
         path: "/signup",
