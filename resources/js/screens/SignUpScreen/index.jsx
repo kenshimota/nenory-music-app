@@ -38,6 +38,8 @@ const GridImg = styled(Grid)(({ theme }) => ({
 
 const GridForm = styled(Grid)(({ theme }) => ({
     padding: theme.spacing(1),
+    maxHeight: "100%",
+    overflow: "auto",
 }));
 
 const GridContainerForm = styled(Grid)(({ theme }) => ({

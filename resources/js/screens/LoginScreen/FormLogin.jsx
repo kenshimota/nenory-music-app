@@ -2,8 +2,10 @@ import * as yup from "yup";
 import React from "react";
 
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 import styled from "@mui/material/styles/styled";
+import Typography from "@mui/material/Typography";
+import { Link as NodeLink } from "react-router-dom";
 
 import SendIcon from "@mui/icons-material/Send";
 
@@ -47,10 +49,18 @@ const FormLogin = ({ onSave, ...props }) => {
 
     return (
         <FormCustom disabled={loading} schema={schema} onSubmit={onSubmit}>
-            <Grid container spacing={1} justifyContent="center">
+            <Grid container spacing={2} justifyContent="center">
                 <Grid item xs={12}>
                     <Typography variant="h5" align="center">
                         Inicia Sesión
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography variant="body2">
+                        ¿No tienes una cuenta?{" "}
+                        <Link component={NodeLink} to="/signup">
+                            Regístrate ahora
+                        </Link>
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -67,6 +77,13 @@ const FormLogin = ({ onSave, ...props }) => {
                         label="Contraseña"
                         errors={status === 422 && error.errors}
                     />
+                </Grid>
+                <Grid item xs={12}>
+                    <Grid container justifyContent="flex-end">
+                        <Link component={NodeLink} to="/forget-password">
+                            ¿Haz olvidado tu contraseña?
+                        </Link>
+                    </Grid>
                 </Grid>
                 {status == 401 && (
                     <Grid item xs={12}>
