@@ -7,7 +7,7 @@ import styled from "@mui/material/styles/styled";
 
 import FormSignup from "./FormSignup";
 import AvatarCoffee from "../../../img/avatar-login.jpg";
-import CoffeeLoginImg from "../../../img/coffee-login.jpg";
+import CoffeeLoginImg from "../../../img/coffee-sign.jpg";
 import { useAuth } from "../../components/Auth";
 
 const GridRoot = styled(Grid)(({ theme }) => ({
@@ -27,7 +27,7 @@ const GridRoot = styled(Grid)(({ theme }) => ({
 
 const GridImg = styled(Grid)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
-    backgroundImage: `url(${CoffeeLoginImg})`,
+    backgroundImage: ` url(${CoffeeLoginImg})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
@@ -82,6 +82,7 @@ const LoginSignup = () => {
                                     <Avatar
                                         alt="Coffee Login"
                                         src={AvatarCoffee}
+                                        style={{ height: 100, width: 100 }}
                                     />
                                 </Grid>
                             </Grid>
