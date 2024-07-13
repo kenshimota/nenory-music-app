@@ -14,6 +14,11 @@ const themes = {
             h3: { fontFamily: "Bebas Neue" },
             h4: { fontFamily: "Bebas Neue" },
             h5: { fontFamily: "Bebas Neue" },
+            h6: { fontFamily: "Bebas Neue" },
+            subtitle1: { fontFamily: "Montserrat" },
+            subtitle2: { fontFamily: "Montserrat" },
+            body1: { fontFamily: "Montserrat" },
+            body2: { fontFamily: "Montserrat" },
         },
         palette: {
             primary: {
