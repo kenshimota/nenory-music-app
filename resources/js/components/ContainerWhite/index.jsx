@@ -1,14 +1,16 @@
 import React from "react";
 import { Grid, styled } from "@mui/material";
 const GridContainer = styled(Grid)(({ theme }) => ({
-    backgroundColor: "#F0F0F0",
+    backgroundColor: "black",
+    height: "100%",
+    width: "100%",
     borderRadius: "5px",
     margin: theme.spacing(1),
 }));
-function ContainerWhite(prosp) {
+function ContainerWhite({ children, ...props }) {
     return (
-        <GridContainer {...prosp} container>
-            <p>HOLA SOY EL CONTENEDOR</p>
+        <GridContainer container {...props} spacing={1}>
+            {children}
         </GridContainer>
     );
 }
