@@ -9,9 +9,9 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void {
         Schema::table('users', function (Blueprint $table) {
+            $table->boolean("code_verificated")->default(false)->nullable();
             $table->datetime('code_mail_expire_at', precision: 0)->nullable()->default(null);
             $table->integer("code_mail")->nullable()->default(null);
         });
@@ -22,9 +22,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('code_mail', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('code_mail');
             $table->dropColumn('code_mail_expire_at');
+            $table->boolean("code_verificated")->default(false);
         });
     }
 };
