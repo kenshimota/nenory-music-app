@@ -7,6 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Role;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Testdeprueba;
+
+
 
 
 class AuthController extends Controller {
@@ -115,4 +119,20 @@ class AuthController extends Controller {
     public function user(Request $request){
         return response()->json($request->user());
     }
+
+    public function forgotPassword(Request $reques){
+        $validator = $reques->validate([
+            'email' => ['required','email','exists:users,email']
+        ]);
+    
+        if (!is_array($validator) &&  $validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        Mail::to($validator['email'])->send(new Testdeprueba("users"));
+        return response()->json(['message' => 'Email sent successfully'], 201);
+
+    }
+
+
 }
