@@ -8,6 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
+import Format from "../../components/Format";
+
 import { Grid } from "@mui/material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -33,95 +35,82 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const GridContent = styled(Grid)(({ theme }) => ({
     height: "100%",
     width: "100%",
-    backgroundColor: "pink",
     position: "relative",
 }));
-
-function createData(
-    username,
-    email,
-    password,
-    name,
-    last_name,
-    identity_document,
-    created_at,
-    update_at
-) {
-    return {
-        username,
-        email,
-        password,
-        name,
-        last_name,
-        identity_document,
-        created_at,
-        update_at,
-    };
-}
 
 const TableContainerCustom = styled(TableContainer)(() => ({
     maxWidth: 1200,
     width: "100%",
+    borderRadius: "10",
+    maxHeight: 900,
 }));
 
 function TableUsers({ currentItems, ...props }) {
     return (
         <GridContent container justifyContent="center">
-            <TableContainerCustom component={Paper}>
+            <TableContainerCustom
+                component={Paper}
+                style={{ overflow: "auto" }}
+            >
                 <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell align="left">
-                                Usuario
-                            </StyledTableCell>
-                            <StyledTableCell align="left">
-                                Correo
-                            </StyledTableCell>
+                    <Table stickyHeader>
+                        <TableHead>
+                            <TableRow>
+                                <StyledTableCell align="left">
+                                    Usuario
+                                </StyledTableCell>
+                                <StyledTableCell align="left">
+                                    Correo
+                                </StyledTableCell>
 
-                            <StyledTableCell align="left">
-                                Nombre
-                            </StyledTableCell>
-                            <StyledTableCell align="left">
-                                Apellido
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
-                                Documento de identidad
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
-                                Fecha de creado
-                            </StyledTableCell>
-                            <StyledTableCell align="right">
-                                Fecha de actualizado
-                            </StyledTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {currentItems.map((row, key) => (
-                            <StyledTableRow key={key}>
-                                <StyledTableCell component="th" scope="row">
-                                    {row.username}
+                                <StyledTableCell align="left">
+                                    Nombre
                                 </StyledTableCell>
                                 <StyledTableCell align="left">
-                                    {row.email}
-                                </StyledTableCell>
-                                <StyledTableCell align="left">
-                                    {row.name}
-                                </StyledTableCell>
-                                <StyledTableCell align="left">
-                                    {row.last_name}
+                                    Apellido
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {row.identity_document}
+                                    Documento de identidad
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {row.created_at}
+                                    Fecha de creado
                                 </StyledTableCell>
                                 <StyledTableCell align="right">
-                                    {row.updated_at}
+                                    Fecha de actualizado
                                 </StyledTableCell>
-                            </StyledTableRow>
-                        ))}
-                    </TableBody>
+                            </TableRow>
+                        </TableHead>
+
+                        <TableBody>
+                            {currentItems.map((row, key) => (
+                                <StyledTableRow key={key} Format={Format}>
+                                    <StyledTableCell component="th" scope="row">
+                                        {row.username}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="left">
+                                        {row.email}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="left">
+                                        {row.name}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="left">
+                                        {row.last_name}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">
+                                        <Format.Number
+                                            value={row.identity_document}
+                                        />
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">
+                                        <Format.Date value={row.created_at} />
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">
+                                        <Format.Date value={row.updated_at} />
+                                    </StyledTableCell>
+                                </StyledTableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
                 </Table>
             </TableContainerCustom>
         </GridContent>
