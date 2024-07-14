@@ -4,13 +4,15 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 
 import { useAuth } from "../Auth";
 
-function ButtonExit() {
+function ButtonExit(props) {
     const { clearToken } = useAuth();
 
     return (
-        <IconButton aria-label="ExitToApp" onClick={clearToken}>
-            <ExitToAppIcon />
-        </IconButton>
+        <React.Fragment>
+            <IconButton aria-label="ExitToApp" onClick={clearToken} {...props}>
+                <ExitToAppIcon />
+            </IconButton>
+        </React.Fragment>
     );
 }
 
