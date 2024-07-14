@@ -2,8 +2,10 @@ import * as yup from "yup";
 import React from "react";
 
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 import styled from "@mui/material/styles/styled";
+import Typography from "@mui/material/Typography";
+import { Link as NodeLink } from "react-router-dom";
 
 import SendIcon from "@mui/icons-material/Send";
 
@@ -11,6 +13,7 @@ import Form from "../../components/Form";
 import Input from "../../components/Input";
 import ButtonCommon from "../../components/ButtonCommon";
 import usePostAPI from "../../hooks/usePostAPI";
+import InputPass from "../../components/InputPass";
 
 const FormCustom = styled(Form)(({ theme }) => ({
     width: "100%",
@@ -22,8 +25,14 @@ const FormCustom = styled(Form)(({ theme }) => ({
 }));
 
 const schema = yup.object().shape({
-    username: yup.string().required("El nombre de usuario es obligatorio"),
-    password: yup.string().required("La contraseña es obligatoria"),
+    username: yup
+        .string()
+        .min(6, "El usuario debe tener al menos 6 caracteres")
+        .required("El nombre de usuario es obligatorio"),
+    password: yup
+        .string()
+        .min(8, "la contraseña debe tener al menos 8 caracteres")
+        .required("La contraseña es obligatoria"),
 });
 
 const FormLogin = ({ onSave, ...props }) => {
@@ -46,10 +55,18 @@ const FormLogin = ({ onSave, ...props }) => {
 
     return (
         <FormCustom disabled={loading} schema={schema} onSubmit={onSubmit}>
-            <Grid container spacing={1} justifyContent="center">
+            <Grid container spacing={2} justifyContent="center">
                 <Grid item xs={12}>
                     <Typography variant="h5" align="center">
                         Inicia Sesión
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography variant="body2">
+                        ¿No tienes una cuenta?{" "}
+                        <Link component={NodeLink} to="/signup">
+                            Regístrate ahora
+                        </Link>
                     </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -57,34 +74,44 @@ const FormLogin = ({ onSave, ...props }) => {
                         name="username"
                         label="Usuario"
                         type="text"
-                        error={
-                            error &&
-                            status === 422 &&
-                            error.errors && 
-			    error.errors.username &&
-                            error.errors.username.join(",")
-                        }
+                        errors={status === 422 && error.errors}
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <Input
+                    <InputPass
                         name="password"
                         label="Contraseña"
-                        type="password"
-                        error={
-                            error &&
-                            status === 422 &&
-                            error.errors &&
-			    error.errors.password &&
-                            error.errors.password.join(",")
-                        }
+                        errors={status === 422 && error.errors}
                     />
                 </Grid>
-                {status === 401 && error && (
+                <Grid item xs={12}>
+                    <Grid container justifyContent="flex-end">
+                        <Link component={NodeLink} to="/forget-password">
+                            ¿Haz olvidado tu contraseña?
+                        </Link>
+                    </Grid>
+                </Grid>
+                {status == 401 && (
                     <Grid item xs={12}>
                         <Typography variant="body2" color="error">
                             Lo siento no puede iniciar sesión, El usuario o la
                             contraseña son incorrectos
+                        </Typography>
+                    </Grid>
+                )}{" "}
+                {status == 500 && error && (
+                    <Grid item xs={12}>
+                        <Typography variant="body2" color="error">
+                            Ha ocurrido un error inhesperado, por favor contacte
+                            al proveedor
+                        </Typography>
+                    </Grid>
+                )}
+                {status == 500 && error && (
+                    <Grid item xs={12}>
+                        <Typography variant="body2" color="error">
+                            Ha ocurrido un error inhesperado, por favor contacte
+                            al proveedor
                         </Typography>
                     </Grid>
                 )}
@@ -92,6 +119,7 @@ const FormLogin = ({ onSave, ...props }) => {
                     <ButtonCommon
                         type="submit"
                         fullWidth
+                        loading={loading}
                         endIcon={<SendIcon />}
                     >
                         Entrar

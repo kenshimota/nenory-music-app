@@ -1,106 +1,91 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
+import Grid from "@mui/material/Grid";
 import AppBar from "@mui/material/AppBar";
-import InputSearch from "../../components/InputSearch";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
+import styled from "@mui/material/styles/styled";
+
 import MenuIcon from "@mui/icons-material/Menu";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ButtonExit from "../../components/ButtonExit";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import { useNavigate } from "react-router-dom";
 
-const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
-    "&:hover": {
-        backgroundColor: alpha(theme.palette.common.white, 0.25),
-    },
-    marginLeft: 0,
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-        marginLeft: theme.spacing(1),
-        width: "auto",
-    },
+const TypographyCustom = styled(Typography)(({ theme }) => ({
+    color: theme.palette.background.paper,
 }));
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+const IconButtonCustom = styled(IconButton)(({ theme }) => ({
+    color: theme.palette.background.paper,
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    width: "100%",
-    "& .MuiInputBase-input": {
-        padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        transition: theme.transitions.create("width"),
-        [theme.breakpoints.up("sm")]: {
-            width: "12ch",
-            "&:focus": {
-                width: "20ch",
-            },
-        },
-    },
+const ButtonExitCustom = styled(ButtonExit)(({ theme }) => ({
+    color: theme.palette.background.paper,
 }));
-// boton de hacia atras
-function BadButton() {
+
+function BackButton() {
     const navigate = useNavigate();
-    const handleGoBack = () => {
-        navigate(-1); // Echar para atrás en la navegación
+    const onClick = () => {
+        navigate(-1);
     };
+
     return (
-        <IconButton
-            onClick={handleGoBack}
-            aria-label="ArrowBackIos"
-            size="large"
+        <IconButtonCustom
+            onClick={onClick}
+            size="medium"
+            edge="start"
+            sx={{ mr: 2 }}
         >
-            <ArrowBackIosIcon fontSize="inherit" />
-        </IconButton>
+            <ArrowBackIcon fontSize="inherit" />
+        </IconButtonCustom>
     );
 }
 
-export default function SearchAppBar({ title, isBack }) {
+export default function SearchAppBar({ subtitle, isBack }) {
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar>
-                    {!isBack && (
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="open drawer"
-                            sx={{ mr: 2 }}
+        <AppBar position="fixed">
+            <Toolbar>
+                <Grid container justifyContent="space-between">
+                    <Grid item>
+                        <Grid container>
+                            {!isBack && (
+                                <IconButtonCustom
+                                    size="medium"
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="open drawer"
+                                    sx={{ mr: 2 }}
+                                >
+                                    <MenuIcon />
+                                </IconButtonCustom>
+                            )}{" "}
+                            {isBack && <BackButton />}
+                        </Grid>
+                    </Grid>
+                    <Grid item>
+                        <TypographyCustom
+                            variant="h6"
+                            align="center"
+                            noWrap
+                            component="div"
                         >
-                            <MenuIcon />
-                        </IconButton>
-                    )}
-                    {isBack && <BadButton />}
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{
-                            flexGrow: 1,
-                            display: { xs: "none", sm: "block" },
-                        }}
-                    >
-                        {title}
-                    </Typography>
-                    <InputSearch />
-                </Toolbar>
-            </AppBar>
-        </Box>
+                            Nenory Coffee
+                        </TypographyCustom>
+                        {subtitle && (
+                            <TypographyCustom
+                                align="center"
+                                variant="subtitle2"
+                            >
+                                {subtitle}
+                            </TypographyCustom>
+                        )}
+                    </Grid>
+                    <Grid item>
+                        <ButtonExitCustom />
+                    </Grid>
+                </Grid>
+            </Toolbar>
+        </AppBar>
     );
 }

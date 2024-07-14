@@ -1,14 +1,23 @@
 import React from "react";
-
-import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+
 import { useForm } from "../Form";
 
-const Input = ({ name, onChange: change, error: r, ...props }) => {
+const Input = ({
+    name,
+    onChange: change,
+    error,
+    errors: errs,
+    disabled,
+    ...props
+}) => {
     const formi = useForm();
-    const { values, errors, handleBlur, handleChange } = formi;
+    const { values, errors, handleBlur, disabled: d, handleChange } = formi;
     const value = values[name] || "";
-    const error = errors[name] || r || null;
+    error =
+        error || errors[name] || (errs && errs[name] && errs[name].join(","));
+    disabled = disabled || d;
 
     const onChange = (e) => {
         handleChange(e);
@@ -27,6 +36,7 @@ const Input = ({ name, onChange: change, error: r, ...props }) => {
                 onBlur={handleBlur}
                 error={error && Boolean(error)}
                 helperText={error}
+                disabled={disabled}
                 {...props}
             />
         </FormControl>
