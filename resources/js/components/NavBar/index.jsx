@@ -1,60 +1,90 @@
 import * as React from "react";
+import Grid from "@mui/material/Grid";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
+import styled from "@mui/material/styles/styled";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import ButtonExit from "../../components/ButtonExit";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import { useNavigate } from "react-router-dom";
 
-// boton de hacia atras
-function BadButton() {
+const TypographyCustom = styled(Typography)(({ theme }) => ({
+    color: theme.palette.background.paper,
+}));
+
+const IconButtonCustom = styled(IconButton)(({ theme }) => ({
+    color: theme.palette.background.paper,
+}));
+
+const ButtonExitCustom = styled(ButtonExit)(({ theme }) => ({
+    color: theme.palette.background.paper,
+}));
+
+function BackButton() {
     const navigate = useNavigate();
-    const handleGoBack = () => {
-        navigate(-1); // Echar para atrás en la navegación
+    const onClick = () => {
+        navigate(-1);
     };
+
     return (
-        <IconButton
-            onClick={handleGoBack}
-            aria-label="ArrowBackIos"
-            size="large"
+        <IconButtonCustom
+            onClick={onClick}
+            size="medium"
+            edge="start"
+            sx={{ mr: 2 }}
         >
-            <ArrowBackIosIcon fontSize="inherit" />
-        </IconButton>
+            <ArrowBackIcon fontSize="inherit" />
+        </IconButtonCustom>
     );
 }
 
-export default function SearchAppBar({ title, isBack }) {
+export default function SearchAppBar({ subtitle, isBack }) {
     return (
-        <AppBar position="static">
+        <AppBar position="fixed">
             <Toolbar>
-                {!isBack && (
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                )}
-                {isBack && <BadButton />}
-                <Typography
-                    variant="h6"
-                    noWrap
-                    component="div"
-                    sx={{
-                        flexGrow: 1,
-                        display: { xs: "none", sm: "block" },
-                    }}
-                >
-                    {title}
-                </Typography>
-                <ButtonExit />
+                <Grid container justifyContent="space-between">
+                    <Grid item>
+                        <Grid container>
+                            {!isBack && (
+                                <IconButtonCustom
+                                    size="medium"
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="open drawer"
+                                    sx={{ mr: 2 }}
+                                >
+                                    <MenuIcon />
+                                </IconButtonCustom>
+                            )}{" "}
+                            {isBack && <BackButton />}
+                        </Grid>
+                    </Grid>
+                    <Grid item>
+                        <TypographyCustom
+                            variant="h6"
+                            align="center"
+                            noWrap
+                            component="div"
+                        >
+                            Nenory Coffee
+                        </TypographyCustom>
+                        {subtitle && (
+                            <TypographyCustom
+                                align="center"
+                                variant="subtitle2"
+                            >
+                                {subtitle}
+                            </TypographyCustom>
+                        )}
+                    </Grid>
+                    <Grid item>
+                        <ButtonExitCustom />
+                    </Grid>
+                </Grid>
             </Toolbar>
         </AppBar>
     );

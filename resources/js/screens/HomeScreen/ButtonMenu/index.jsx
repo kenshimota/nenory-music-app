@@ -22,10 +22,6 @@ const GridItem = styled(Grid)(({ theme }) => ({
     },
 }));
 
-const GridContainer = styled(Grid)(({ theme }) => ({
-    margin: theme.spacing(4),
-}));
-
 function ButtonMenu({ title, src, link }) {
     let navegate = useNavigate();
 
@@ -52,14 +48,14 @@ function ButtonMenu({ title, src, link }) {
 }
 
 const ListaButtons = () => (
-    <GridContainer container justifyContent="center">
+    <Grid container justifyContent="center">
         <ButtonMenu title={"usuarios"} link="/users" src={AvatarUsuario} />
         <ButtonMenu
             title={"proveedor"}
             link="/suppliers"
             src={AvatarProveedor}
         />
-    </GridContainer>
+    </Grid>
 );
 
 export default ListaButtons;
