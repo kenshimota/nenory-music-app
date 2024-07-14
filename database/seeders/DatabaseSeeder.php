@@ -9,8 +9,8 @@ use App\Models\City;
 use Illuminate\Database\Seeder;
 
 
-class DatabaseSeeder extends Seeder
-{
+class DatabaseSeeder extends Seeder {
+
     /**
      * Seed the application's database.
      */
@@ -28,20 +28,8 @@ class DatabaseSeeder extends Seeder
             'description' => 'Empleado'
         ]);
 
-        User::firstOrCreate([
-            "username" => "administrator",
-            "name" => "Testing1",
-            "last_name" => "Testing2",
-            'email' => 'test+3@example.com',
-            "password" => "manager1234",
-            "identity_document" => 6565542,
-            "role_id" => Role::where('name', 'admin')->first()->id,
-        ]);
-
         $state = State::firstOrCreate(["name" => "admin123"]);
 
         City::firstOrCreate(["name" => "jung", "state_id" => $state->id]);
-
-
     }
 }
