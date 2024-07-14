@@ -15,7 +15,10 @@ use App\Http\Controllers\API\ProductController;
 Route::group(['prefix' => 'auth'], function () {
     Route::post('signin', [AuthController::class, 'signIn']);
     Route::post('signup', [AuthController::class, 'signUp']);
+
     Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('verify-code-password', [AuthController::class, 'verifyCodePassword']);
+    Route::post('reset-password', [AuthController::class, 'resetPassword']);
 
     
     Route::middleware(["auth:api", "auth"])->group(function() {
