@@ -11,7 +11,7 @@ const useAutoGetAPI = ({ url, query }) => {
         url: `${url}?${queryString}`,
     });
 
-    useEffect(() => {
+    const reload = () => {
         const headers = {};
 
         if (session) {
@@ -19,6 +19,10 @@ const useAutoGetAPI = ({ url, query }) => {
         }
 
         request({ headers });
+    }
+
+    useEffect(() => {
+        reload();
     }, [queryString]);
 
     useEffect(() => {
@@ -27,7 +31,7 @@ const useAutoGetAPI = ({ url, query }) => {
         }
     }, [session, status]);
 
-    return { ...state, status };
+    return { ...state, status, reload };
 };
 
 export default useAutoGetAPI;
