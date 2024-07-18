@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("name");
             $table->string("abreviated");
             $table->unsignedBigInteger("measure_type_id");
-            $table->foreign("measure_type_id")->references("id");
+            $table->foreign("measure_type_id")->references("id")->on("measure_types");
             $table->timestamps();
         });
     }
