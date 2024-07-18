@@ -13,6 +13,7 @@ class UserController extends Controller {
      */
     public function index(Request $request){
         $tableUser = User::query();
+        $tableUser->with("role");
 
         if($request->has("search")){
             $tableUser->where("name", "LIKE", "%{$request->search}%")
@@ -46,14 +47,14 @@ class UserController extends Controller {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        return User::create($request->all());
+        return User::with("role")->create($validator);
     }
 
     /**
      * Display the specified resource.
      */
     public function show(string $id) {
-        return User::findOrFail($id);
+        return User::with("role")->findOrFail($id);
     }
 
     /**
@@ -73,7 +74,7 @@ class UserController extends Controller {
         }
 
         User::whereId($id)->update($validator);
-        return response()->json(User::find($id), 202);
+        return response()->json(User::with("role")->find($id), 202);
     }
 
     /**
