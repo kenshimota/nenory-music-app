@@ -19,7 +19,7 @@ const useAutoGetAPI = ({ url, query }) => {
         }
 
         request({ headers });
-    }
+    };
 
     useEffect(() => {
         reload();

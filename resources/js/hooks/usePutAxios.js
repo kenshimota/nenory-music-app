@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { useState } from "react";
 
-const usePostAxios = ({ url, headers = {} }) => {
+const usePutAxios = ({ url, headers = {} }) => {
     const [response, setResponse] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -14,7 +14,7 @@ const usePostAxios = ({ url, headers = {} }) => {
         setLoading(true);
 
         try {
-            const { data: res, status } = await axios.post(url, data, {
+            const { data: res, status } = await axios.put(url, data, {
                 headers,
             });
             setResponse(res);
@@ -36,4 +36,4 @@ const usePostAxios = ({ url, headers = {} }) => {
     return { request, loading, error, response, status };
 };
 
-export default usePostAxios;
+export default usePutAxios;
