@@ -7,6 +7,8 @@ import Typography from "@mui/material/Typography";
 
 import AvatarUsuario from "../../../../img/usuario.png";
 import AvatarProveedor from "../../../../img/proveedor2.png";
+import AvatarProducts from "../../../../img/products.webp";
+import AvatarCompras from "../../../../img/compras.jpg";
 
 const GridItem = styled(Grid)(({ theme }) => ({
     margin: theme.spacing(1),
@@ -14,6 +16,7 @@ const GridItem = styled(Grid)(({ theme }) => ({
     background: theme.palette.background.paper,
     padding: theme.spacing(3),
     borderRadius: 100,
+
     border: "1px solid #ddd",
     "&:hover": {
         backgroundColor: theme.palette.primary.main,
@@ -55,6 +58,12 @@ const ListaButtons = () => (
             link="/suppliers"
             src={AvatarProveedor}
         />
+        <ButtonMenu
+            title={"productos"}
+            link="/suppliers"
+            src={AvatarProducts}
+        />
+        <ButtonMenu title={"Compras"} link="/suppliers" src={AvatarCompras} />
     </Grid>
 );
 

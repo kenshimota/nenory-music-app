@@ -22,7 +22,7 @@ const GridContent = styled(Grid)(() => ({
 
 function ShowListUsers() {
     const [page, setPage] = useState(1);
-    const { response, loading } = useAutoGetAPI({
+    const { response, loading, reload } = useAutoGetAPI({
         url: "/users",
         query: { page },
     });
@@ -37,7 +37,7 @@ function ShowListUsers() {
             <GridContent item xs={12}>
                 {loading && <Loading />}
                 {!loading && response && (
-                    <TableUsers currentItems={response.data} />
+                    <TableUsers currentItems={response.data} onSave={reload} />
                 )}
             </GridContent>
         </GridRoot>

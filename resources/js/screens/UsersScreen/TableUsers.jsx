@@ -8,6 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
+import ButtonDeleteUser from "./ButtonDeleteUser";
+
 import Format from "../../components/Format";
 
 import { Grid } from "@mui/material";
@@ -45,7 +47,7 @@ const TableContainerCustom = styled(TableContainer)(() => ({
     maxHeight: 900,
 }));
 
-function TableUsers({ currentItems, ...props }) {
+function TableUsers({ currentItems, onSave, ...props }) {
     return (
         <GridContent container justifyContent="center">
             <TableContainerCustom
@@ -78,6 +80,9 @@ function TableUsers({ currentItems, ...props }) {
                                 <StyledTableCell align="right">
                                     Fecha de actualizado
                                 </StyledTableCell>
+                                <StyledTableCell align="right">
+                                    Acciones
+                                </StyledTableCell>
                             </TableRow>
                         </TableHead>
 
@@ -106,6 +111,12 @@ function TableUsers({ currentItems, ...props }) {
                                     </StyledTableCell>
                                     <StyledTableCell align="right">
                                         <Format.Date value={row.updated_at} />
+                                    </StyledTableCell>
+                                    <StyledTableCell align="right">
+                                        <ButtonDeleteUser
+                                            userId={row.id}
+                                            onSave={onSave}
+                                        />
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ))}
