@@ -6,6 +6,7 @@ import TableUsers from "./TableUsers";
 import TobbalUsers from "./TobbalUsers";
 import useAutoGetAPI from "../../hooks/useAutoGetAPI";
 import Loading from "../../components/Loading";
+import ButtonCreate from "./ButtonCreate";
 
 const GridRoot = styled(Grid)(({ theme }) => ({
     width: "100%",
@@ -15,11 +16,14 @@ const GridRoot = styled(Grid)(({ theme }) => ({
 }));
 
 const GridContent = styled(Grid)(() => ({
-    height: "calc(100% - 70px)",
+    height: "calc(100% - 120px)",
     width: "100%",
     position: "relative",
 }));
 
+const GridContent2 = styled(Grid)(({ theme }) => ({
+    padding: theme.spacing(1),
+}));
 function ShowListUsers() {
     const [page, setPage] = useState(1);
     const { response, loading, reload } = useAutoGetAPI({
@@ -38,6 +42,11 @@ function ShowListUsers() {
                     <TableUsers currentItems={response.data} onSave={reload} />
                 )}
             </GridContent>
+            <GridContent2 item xs={12}>
+                <Grid container justifyContent="center">
+                    <ButtonCreate />
+                </Grid>
+            </GridContent2>
         </GridRoot>
     );
 }

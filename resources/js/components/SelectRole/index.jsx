@@ -2,8 +2,15 @@ import * as React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
+import Auth from "../../components/Auth";
+import useAutoGetAPI from "../../hooks/useAutoGetAPI";
 
-export default function NativeSelectDemo() {
+function SelectRole() {
+    const { response } = useAutoGetAPI({
+        url: "/roles",
+    });
+
+    console.log(response);
     return (
         <FormControl fullWidth>
             <InputLabel variant="standard" htmlFor="uncontrolled-native">
@@ -17,3 +24,5 @@ export default function NativeSelectDemo() {
         </FormControl>
     );
 }
+
+export default SelectRole;
