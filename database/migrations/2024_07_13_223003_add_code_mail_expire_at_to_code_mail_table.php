@@ -20,12 +20,11 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+    public function down(): void {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('code_mail');
             $table->dropColumn('code_mail_expire_at');
-            $table->boolean("code_verificated")->default(false);
+            $table->dropColumn("code_verificated")->default(false);
         });
     }
 };
