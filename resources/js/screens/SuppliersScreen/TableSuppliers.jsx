@@ -7,6 +7,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Format from "../../components/Format";
 import ShowListData from "../../components/ShowListData";
 import ButtonEditSupplier from "./ButtonEditSupplier";
+import ButtonDeleteSupplier from "./ButtonDeleteSupplier";
 
 const columns = [
     { id: "name", title: "Nombre" },
@@ -40,9 +41,10 @@ const columns = [
     },
 ];
 
-const TableSuppliersActions = ({ row, onSave }) => (
+const TableSuppliersActions = ({ row, onSave, ...props }) => (
     <React.Fragment>
         <ButtonEditSupplier supplierId={row.id} onSave={onSave} />
+        <ButtonDeleteSupplier supplierId={row.id} onSave={onSave} />
     </React.Fragment>
 );
 

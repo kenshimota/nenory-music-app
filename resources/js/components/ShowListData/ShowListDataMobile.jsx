@@ -37,16 +37,15 @@ const ShowDataValue = ({ Provider, id, row }) => (
     </React.Fragment>
 );
 
-const ShowListDataMobile = ({
-    currentItems,
+const ListItemShow = ({
     columns,
     icon,
+    current,
     img,
     onSave,
     firstColumn,
     secondColumn,
     ComponentActions,
-    ...props
 }) => {
     const [open, setOpen] = useState(false);
     const ComponentTitle = icon || img ? GridWithAvatar : GridWithoutAvatar;
@@ -54,94 +53,79 @@ const ShowListDataMobile = ({
         columns.map((column) => [column.id, column.Provider])
     );
 
-    console.log({ open });
+    return (
+        <ListItemCustom onClick={() => setOpen(!open)}>
+            <Grid container>
+                {icon && <Grid item>{icon && <Avatar>{icon}</Avatar>}</Grid>}
+                {img && <Grid item>{img && <Avatar src={img} />}</Grid>}
 
+                <ComponentTitle>
+                    <Typography variant="subtitle2">
+                        <ShowDataValue
+                            row={current}
+                            id={firstColumn}
+                            Provider={providers.get(firstColumn) || null}
+                        />
+                    </Typography>
+                    <Typography variant="body2">
+                        <ShowDataValue
+                            row={current}
+                            id={secondColumn}
+                            Provider={providers.get(firstColumn) || null}
+                        />
+                    </Typography>
+                </ComponentTitle>
+
+                <Grid item xs={12}>
+                    <Collapse in={open} unmountOnExit timeout="auto">
+                        <GridContent container>
+                            {columns.map(({ id, title, Provider }) => (
+                                <Grid item xs={12} key={id}>
+                                    <Typography
+                                        component="span"
+                                        variant="subtitle2"
+                                    >
+                                        {title}:{" "}
+                                    </Typography>
+
+                                    <Typography
+                                        component="span"
+                                        variant="body1"
+                                    >
+                                        <ShowDataValue
+                                            id={id}
+                                            row={current}
+                                            Provider={Provider}
+                                        />
+                                    </Typography>
+                                </Grid>
+                            ))}
+                        </GridContent>
+                    </Collapse>
+                </Grid>
+
+                {ComponentActions && (
+                    <Grid item xs={12}>
+                        <Grid
+                            container
+                            justifyContent="flex-end"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <ComponentActions row={current} onSave={onSave} />
+                        </Grid>
+                    </Grid>
+                )}
+            </Grid>
+        </ListItemCustom>
+    );
+};
+
+const ShowListDataMobile = ({ currentItems, ...props }) => {
     return (
         <ListCustom>
             {currentItems.map((current, key) => (
                 <React.Fragment key={key}>
-                    <ListItemCustom onClick={() => setOpen(!open)}>
-                        <Grid container>
-                            {icon && (
-                                <Grid item>
-                                    {icon && <Avatar>{icon}</Avatar>}
-                                </Grid>
-                            )}
-                            {img && (
-                                <Grid item>{img && <Avatar src={img} />}</Grid>
-                            )}
-
-                            <ComponentTitle>
-                                <Typography variant="subtitle2">
-                                    <ShowDataValue
-                                        row={current}
-                                        id={firstColumn}
-                                        Provider={
-                                            providers.get(firstColumn) || null
-                                        }
-                                    />
-                                </Typography>
-                                <Typography variant="body2">
-                                    <ShowDataValue
-                                        row={current}
-                                        id={secondColumn}
-                                        Provider={
-                                            providers.get(firstColumn) || null
-                                        }
-                                    />
-                                </Typography>
-                            </ComponentTitle>
-
-                            <Grid item xs={12}>
-                                <Collapse
-                                    in={open}
-                                    unmountOnExit
-                                    timeout="auto"
-                                >
-                                    <GridContent container>
-                                        {columns.map(
-                                            ({ id, title, Provider }) => (
-                                                <Grid item xs={12} key={id}>
-                                                    <Typography
-                                                        component="span"
-                                                        variant="subtitle2"
-                                                    >
-                                                        {title}:{" "}
-                                                    </Typography>
-
-                                                    <Typography
-                                                        component="span"
-                                                        variant="body1"
-                                                    >
-                                                        <ShowDataValue
-                                                            id={id}
-                                                            row={current}
-                                                            Provider={Provider}
-                                                        />
-                                                    </Typography>
-                                                </Grid>
-                                            )
-                                        )}
-                                    </GridContent>
-                                </Collapse>
-                            </Grid>
-
-                            {ComponentActions && (
-                                <Grid item xs={12}>
-                                    <Grid
-                                        container
-                                        justifyContent="flex-end"
-                                        onClick={(e) => e.stopPropagation()}
-                                    >
-                                        <ComponentActions
-                                            row={current}
-                                            onSave={onSave}
-                                        />
-                                    </Grid>
-                                </Grid>
-                            )}
-                        </Grid>
-                    </ListItemCustom>
+                    <ListItemShow current={current} {...props} />
                 </React.Fragment>
             ))}
         </ListCustom>

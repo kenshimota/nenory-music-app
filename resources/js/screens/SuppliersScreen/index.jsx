@@ -38,7 +38,10 @@ const SuppliersScreen = () => {
                 <GridContent item xs={12}>
                     {loading && <Loading />}
                     {!loading && response && (
-                        <TableSuppliers currentItems={response.data} />
+                        <TableSuppliers
+                            currentItems={response.data}
+                            onSave={reload}
+                        />
                     )}
                 </GridContent>
                 <Grid item xs={12}>
