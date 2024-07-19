@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 
 import IconButton from "@mui/material/IconButton";
+import styled from "@mui/material/styles/styled";
 
 import AddIcon from "@mui/icons-material/Add";
 
 import DialogCreateSupplier from "./DialogCreateSupplier";
+
+const IconButtonStyled = styled(IconButton)(({ theme }) => ({
+    backgroundColor: theme.palette.primary.main,
+}));
+
+const AddIconStyled = styled(AddIcon)(({ theme }) => ({
+    color: "white",
+}));
 
 const ButtonCreateSupplier = ({ onSave, ...props }) => {
     const [open, setOpen] = useState(false);
@@ -24,9 +33,9 @@ const ButtonCreateSupplier = ({ onSave, ...props }) => {
                 onClose={handleClose}
                 onSave={onSave}
             />
-            <IconButton {...props} onClick={handleOpen}>
-                <AddIcon />
-            </IconButton>
+            <IconButtonStyled {...props} onClick={handleOpen}>
+                <AddIconStyled />
+            </IconButtonStyled>
         </React.Fragment>
     );
 };
