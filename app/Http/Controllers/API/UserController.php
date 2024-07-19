@@ -65,7 +65,7 @@ class UserController extends Controller {
             'name' => ['required', 'min:3', 'max:255'],
             'last_name' => ['required', 'min:2', 'max:255' ],
             'password' => ['required', 'min:8'],
-            'identity_document' => ['required', 'unique:users'],
+            'identity_document' => ['required', 'unique:users', 'gt:0'],
             'role_id' => ['required','exists:roles,id']
         ]);
 

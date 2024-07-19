@@ -36,7 +36,7 @@ class SuppliersController extends Controller {
         $validator = $request->validate([
             'name' => ['required', 'min:3', 'max:255'],
             'email' => ['required','email','unique:suppliers'],
-            'identity_document' => ['required', 'unique:suppliers'],
+            'identity_document' => ['required', 'unique:suppliers', 'gt:0'],
             'code_postal' => ['integer'],
             'city_id' => ['required','exists:cities,id'],
             'address' => ['string','min:5','max:255']
