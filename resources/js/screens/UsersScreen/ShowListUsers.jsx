@@ -27,8 +27,6 @@ function ShowListUsers() {
         query: { page },
     });
 
-    console.log({ response, loading });
-
     return (
         <GridRoot container>
             <Grid item xs={12}>
@@ -44,7 +42,4 @@ function ShowListUsers() {
     );
 }
 
-/*
- */
-//   <ContainerWhite>  </ContainerWhite>
 export default ShowListUsers;
