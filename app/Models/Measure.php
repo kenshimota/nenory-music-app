@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class City extends Model {
+class Measure extends Model {
     use HasFactory;
 
-    public function state() {
-        return $this->belongsTo(State::class, "state_id", "id");
+    public function type() {
+        return $this->belongsTo(MeasureType::class, "measure_type_id", "id");
     }
 }
