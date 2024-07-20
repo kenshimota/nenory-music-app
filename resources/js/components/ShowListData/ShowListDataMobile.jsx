@@ -157,7 +157,7 @@ const ShowListDataMobile = ({
                 </ListCustom>
             </GridContentList>
             <Grid item xs={12}>
-                <Grid container justifyContent="space-around">
+                <Grid container justifyContent="space-between">
                     <ButtonCommon
                         startIcon={<ArrowBack />}
                         disabled={!isBack}

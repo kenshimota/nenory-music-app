@@ -16,6 +16,10 @@ class SuppliersController extends Controller {
         $tableSupplier->with("city");
 
 
+        if($request->has("city_id")) {
+            $tableSupplier->where("city_id", $request->city_id);
+        }
+
         if($request->has("search")){
             $tableSupplier->where("name", "LIKE", "%{$request->search}%")
                 ->orWhere("email", "LIKE", "%{$request->search}%")

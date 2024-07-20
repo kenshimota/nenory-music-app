@@ -76,6 +76,12 @@ const UsersScreen = (props) => {
                         <TableUsers
                             currentItems={response.data}
                             onSave={reload}
+                            isBack={response.current_page !== 1}
+                            isNext={
+                                response.current_page !== response.last_page
+                            }
+                            onBack={() => setPage(page - 1)}
+                            onNext={() => setPage(page + 1)}
                         />
                     )}
                 </GridContent>

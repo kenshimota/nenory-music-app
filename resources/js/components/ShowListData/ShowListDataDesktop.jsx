@@ -49,7 +49,7 @@ const TableContainerCustom = styled(TableContainer)(() => ({
     maxWidth: 1200,
     width: "100%",
     borderRadius: "10",
-    maxHeight: "calc(100% - 60px)",
+    height: "calc(100% - 60px)",
     overflow: "auto",
 }));
 
