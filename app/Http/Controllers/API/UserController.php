@@ -15,6 +15,10 @@ class UserController extends Controller {
         $tableUser = User::query();
         $tableUser->with("role");
 
+        if($request->has("role_id")) {
+            $tableUser->where("role_id", $request->role_id);
+        }
+
         if($request->has("search")){
             $tableUser->where("name", "LIKE", "%{$request->search}%")
                 ->orWhere("last_name", "LIKE", "%{$request->search}%")
@@ -61,11 +65,12 @@ class UserController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id) {
+        $user = User::with("role")->findOrFail($id);
+
         $validator = $request->validate([
             'name' => ['required', 'min:3', 'max:255'],
             'last_name' => ['required', 'min:2', 'max:255' ],
-            'password' => ['required', 'min:8'],
-            'identity_document' => ['required', 'unique:users', 'gt:0'],
+            'identity_document' => ['required', 'unique:users,identity_document,'.$user->id, 'gt:0'],
             'role_id' => ['required','exists:roles,id']
         ]);
 

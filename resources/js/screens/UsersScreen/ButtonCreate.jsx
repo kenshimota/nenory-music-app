@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+
 import IconButton from "@mui/material/IconButton";
-import AddIcon from "@mui/icons-material/Add";
+
 import styled from "@mui/material/styles/styled";
-import Dialog from "@mui/material/Dialog";
-import { DialogTitle } from "@mui/material";
-import FormCreateUser from "./FormCreateUser";
+
+import AddIcon from "@mui/icons-material/Add";
+
+import DialogCreateUser from "./DialogCreateUser";
 
 const IconButtonStyled = styled(IconButton)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
@@ -14,25 +16,23 @@ const AddIconStyled = styled(AddIcon)(({ theme }) => ({
     color: "white",
 }));
 
-function ButtonCreate(props) {
+function ButtonCreate({ onSave, ...props }) {
     const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
+    const onOpen = () => {
         setOpen(true);
     };
 
-    const handleClose = () => {
+    const onClose = () => {
         setOpen(false);
     };
     return (
-        <div>
-            <IconButtonStyled aria-label="Add" onClick={handleClickOpen}>
+        <React.Fragment>
+            <IconButtonStyled aria-label="Add" onClick={onOpen} {...props}>
                 <AddIconStyled />
             </IconButtonStyled>
-            <Dialog open={open} onClose={handleClose}>
-                <FormCreateUser />
-            </Dialog>
-        </div>
+            <DialogCreateUser open={open} onSave={onSave} onClose={onClose} />
+        </React.Fragment>
     );
 }
 //<DialogTitle>Crear Usuario</DialogTitle>

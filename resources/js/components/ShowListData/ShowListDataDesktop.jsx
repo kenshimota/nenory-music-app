@@ -1,14 +1,18 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import IconButton from "@mui/material/IconButton";
+import TableRow from "@mui/material/TableRow";
+import TableHead from "@mui/material/TableHead";
+import TableBody from "@mui/material/TableBody";
+import TableFooter from "@mui/material/TableFooter";
+import TableContainer from "@mui/material/TableContainer";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import styled from "@mui/material/styles/styled";
+
+import { ArrowForward, ArrowBack } from "@mui/icons-material";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -35,11 +39,18 @@ const GridContent = styled(Grid)(({ theme }) => ({
     position: "relative",
 }));
 
+const GridPagination = styled(Grid)(({ theme }) => ({
+    maxWidth: 1200,
+    width: "100%",
+    position: "relative",
+}));
+
 const TableContainerCustom = styled(TableContainer)(() => ({
     maxWidth: 1200,
     width: "100%",
     borderRadius: "10",
-    maxHeight: 900,
+    maxHeight: "calc(100% - 60px)",
+    overflow: "auto",
 }));
 
 const ShowListDataDesktop = ({
@@ -47,15 +58,15 @@ const ShowListDataDesktop = ({
     onSave,
     ComponentActions,
     columns,
+    isNext,
+    isBack,
+    onBack,
+    onNext,
     ...props
 }) => (
     <GridContent container justifyContent="center">
         <TableContainerCustom component={Paper} style={{ overflow: "auto" }}>
-            <Table
-                stickyHeader
-                sx={{ minWidth: 700 }}
-                aria-label="customized table"
-            >
+            <Table stickyHeader aria-label="customized table">
                 <TableHead>
                     <TableRow>
                         {columns.map(({ id, title, props }) => (
@@ -86,11 +97,16 @@ const ShowListDataDesktop = ({
                                 </StyledTableCell>
                             ))}
                             {ComponentActions && (
-                                <StyledTableCell align="right">
-                                    <ComponentActions
-                                        row={row}
-                                        onSave={onSave}
-                                    />
+                                <StyledTableCell
+                                    align="right"
+                                    style={{ minWidth: 150 }}
+                                >
+                                    <Grid container justifyContent="flex-end">
+                                        <ComponentActions
+                                            row={row}
+                                            onSave={onSave}
+                                        />
+                                    </Grid>
                                 </StyledTableCell>
                             )}
                         </StyledTableRow>
@@ -98,6 +114,17 @@ const ShowListDataDesktop = ({
                 </TableBody>
             </Table>
         </TableContainerCustom>
+        <GridPagination item>
+            <Grid container justifyContent="flex-end">
+                <IconButton disabled={!isBack} onClick={onBack}>
+                    <ArrowBack />
+                </IconButton>
+
+                <IconButton disabled={!isNext} onClick={onNext}>
+                    <ArrowForward />
+                </IconButton>
+            </Grid>
+        </GridPagination>
     </GridContent>
 );
 

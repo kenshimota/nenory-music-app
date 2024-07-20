@@ -5,8 +5,14 @@ import Format from "../../components/Format";
 import ButtonDeleteUser from "./ButtonDeleteUser";
 import ShowListData from "../../components/ShowListData";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ButtonEditUser from "./ButtonEditUser";
 
 const columns = [
+    {
+        id: "role",
+        title: "Tipo de usuario",
+        Provider: ({ value }) => value.description,
+    },
     { id: "username", title: "Usuario" },
     {
         id: "email",
@@ -38,6 +44,7 @@ const columns = [
 
 const TableUsersActions = ({ row, onSave }) => (
     <React.Fragment>
+        <ButtonEditUser userId={row.id} onSave={onSave} />
         <ButtonDeleteUser userId={row.id} onSave={onSave} />
     </React.Fragment>
 );
