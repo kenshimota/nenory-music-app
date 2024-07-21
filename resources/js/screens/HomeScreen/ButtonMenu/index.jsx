@@ -10,6 +10,7 @@ import AvatarUsuario from "../../../../img/usuario.png";
 import AvatarProducts from "../../../../img/products.webp";
 import AvatarProveedor from "../../../../img/proveedor2.png";
 import AvatarIngredients from "../../../../img/ingredients.jpeg";
+import ProtectedChild from "../../../components/ProtectedChild";
 
 const GridRoot = styled(Grid)(({ theme }) => ({
     width: "100%",
@@ -60,8 +61,10 @@ function ButtonMenu({ title, src, link }) {
 
 const ListaButtons = () => (
     <GridRoot container justifyContent="center" alignContent="center">
-        <Grid item xs={12}></Grid>
-        <ButtonMenu title="Usuarios" link="/users" src={AvatarUsuario} />
+        <ProtectedChild roles={["admin"]}>
+            <ButtonMenu title="Usuarios" link="/users" src={AvatarUsuario} />
+        </ProtectedChild>
+
         <ButtonMenu
             title={"Proveedor"}
             link="/suppliers"

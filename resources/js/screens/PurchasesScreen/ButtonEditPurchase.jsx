@@ -5,6 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 
 import DialogCreatePurchase from "./DialogCreatePurchase";
+import ProtectedChild from "../../components/ProtectedChild";
 
 const ButtonEditPurchase = ({ onSave, purchaseId, ...props }) => {
     const [open, setOpen] = useState(false);
@@ -18,7 +19,7 @@ const ButtonEditPurchase = ({ onSave, purchaseId, ...props }) => {
     };
 
     return (
-        <React.Fragment>
+        <ProtectedChild roles={["admin"]}>
             <DialogCreatePurchase
                 open={open}
                 onSave={onSave}
@@ -28,7 +29,7 @@ const ButtonEditPurchase = ({ onSave, purchaseId, ...props }) => {
             <IconButton {...props} onClick={onOpen}>
                 <EditIcon />
             </IconButton>
-        </React.Fragment>
+        </ProtectedChild>
     );
 };
 
