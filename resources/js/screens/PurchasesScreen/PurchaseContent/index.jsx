@@ -72,6 +72,11 @@ const PurchaseContentItem = ({ purchaseId, onClose, ...props }) => {
                 >
                     <ButtonAddItem purchaseId={purchaseId} onSave={reload} />
                     <ButtonSendPurchase
+                        disabled={
+                            response &&
+                            response.data &&
+                            response.data.length === 0
+                        }
                         onSave={onClose}
                         purchaseId={purchaseId}
                     />
