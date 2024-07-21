@@ -67,6 +67,12 @@ class AuthController extends Controller {
 
         $validator["roles_id"]= 1;
 
+        $rol = "admin";
+        $first = User::first();
+        if($first) {
+            $rol = "employer";
+        }
+
         $user = User::create([
             'name' => $request->name,
             'last_name'=> $request->last_name,
@@ -74,7 +80,7 @@ class AuthController extends Controller {
             'email' => $request->email,
             'password' => $request->password,
             'identity_document' => $request->identity_document,
-            "role_id" => Role::where('name', 'admin')->first()->id,
+            "role_id" => Role::where('name', $rol)->first()->id,
         ]);
 
 
@@ -99,7 +105,10 @@ class AuthController extends Controller {
      * Obtener el objeto User como json
      */
     public function user(Request $request){
-        return response()->json($request->user());
+        $user = $request->user();
+        $user->load('role');
+
+        return response()->json($user);
     }
 
 

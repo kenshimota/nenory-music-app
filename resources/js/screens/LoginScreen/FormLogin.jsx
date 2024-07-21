@@ -46,8 +46,6 @@ const FormLogin = ({ onSave, ...props }) => {
             return;
         }
 
-        console.log(res);
-
         if (onSave) {
             onSave(res);
         }

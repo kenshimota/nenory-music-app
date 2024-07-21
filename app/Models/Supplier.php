@@ -9,6 +9,10 @@ class Supplier extends Model
 {
     use HasFactory;
 
+    public function city() {
+        return $this->belongsTo(City::class, "city_id", "id");
+    }
+
     /**
      * The attributes that are mass assignable.
      *

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Role;
 use App\Models\State;
 use App\Models\City;
+use App\Models\Supplier;
 use App\Models\MeasureType;
 use App\Models\Measure;
 use App\Models\MeasureRelationship;
@@ -37,7 +38,7 @@ class DatabaseSeeder extends Seeder {
             [
                 "name" => "Numerico",
                 "measures" => [
-                    ["name" => "unidades", "abreviated" => "", "amount" => 1],
+                    ["name" => "unidades", "abreviated" => "c/u", "amount" => 1],
                 ]
             ]
         ];
@@ -108,7 +109,6 @@ class DatabaseSeeder extends Seeder {
                 }      
             }
         }
-
 
     }
 }

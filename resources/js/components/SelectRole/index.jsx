@@ -1,19 +1,25 @@
 import * as React from "react";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
-import NativeSelect from "@mui/material/NativeSelect";
+import MenuItem from "@mui/material/MenuItem";
 
-export default function NativeSelectDemo() {
+import SelectForm from "../Select";
+import useAutoGetAPI from "../../hooks/useAutoGetAPI";
+
+function SelectRole(props) {
+    const { response } = useAutoGetAPI({
+        url: "/roles",
+    });
+    const roles = response || [];
+
     return (
-        <FormControl fullWidth>
-            <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                Tipo de usuario
-            </InputLabel>
-            <NativeSelect defaultValue={3}>
-                <option value={3}></option>
-                <option value={1}>Administrador</option>
-                <option value={2}>Empleado</option>
-            </NativeSelect>
-        </FormControl>
+        <SelectForm {...props}>
+            {roles &&
+                roles.map((rol) => (
+                    <MenuItem key={rol.id} value={rol.id}>
+                        {rol.description}
+                    </MenuItem>
+                ))}
+        </SelectForm>
     );
 }
+
+export default SelectRole;

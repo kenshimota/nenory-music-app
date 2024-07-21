@@ -5,20 +5,31 @@ import Avatar from "@mui/material/Avatar";
 import { Grid, styled } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
+import AvatarCompras from "../../../../img/compras.jpg";
 import AvatarUsuario from "../../../../img/usuario.png";
+import AvatarProducts from "../../../../img/products.webp";
 import AvatarProveedor from "../../../../img/proveedor2.png";
+import AvatarIngredients from "../../../../img/ingredients.jpeg";
+import ProtectedChild from "../../../components/ProtectedChild";
+
+const GridRoot = styled(Grid)(({ theme }) => ({
+    width: "100%",
+    height: "100%",
+    position: "relative",
+    overflow: "auto",
+    padding: theme.spacing(1),
+}));
 
 const GridItem = styled(Grid)(({ theme }) => ({
-    margin: theme.spacing(1),
     cursor: "pointer",
+    margin: theme.spacing(1),
     background: theme.palette.background.paper,
-    padding: theme.spacing(3),
-    borderRadius: 100,
-    border: "1px solid #ddd",
+    padding: theme.spacing(1),
+    border: `1px solid #ddd`,
     "&:hover": {
         backgroundColor: theme.palette.primary.main,
         color: "white",
-        transition: "2s",
+        transition: "0.5s",
     },
 }));
 
@@ -33,9 +44,10 @@ function ButtonMenu({ title, src, link }) {
         <GridItem item onClick={handleClick}>
             <Grid container justifyContent="center">
                 <Avatar
-                    alt={title}
                     src={src}
-                    style={{ height: 100, width: 100 }}
+                    alt={title}
+                    variant="square"
+                    style={{ height: 120, width: 120 }}
                 />
             </Grid>
             <Grid item xs={12}>
@@ -48,14 +60,25 @@ function ButtonMenu({ title, src, link }) {
 }
 
 const ListaButtons = () => (
-    <Grid container justifyContent="center">
-        <ButtonMenu title={"usuarios"} link="/users" src={AvatarUsuario} />
+    <GridRoot container justifyContent="center" alignContent="center">
+        <ProtectedChild roles={["admin"]}>
+            <ButtonMenu title="Usuarios" link="/users" src={AvatarUsuario} />
+        </ProtectedChild>
+
         <ButtonMenu
-            title={"proveedor"}
+            title={"Proveedor"}
             link="/suppliers"
             src={AvatarProveedor}
         />
-    </Grid>
+        <ButtonMenu
+            title="Ingredientes"
+            link="/ingredients"
+            src={AvatarIngredients}
+        />
+        <ButtonMenu title="Productos" link="/products" src={AvatarProducts} />
+
+        <ButtonMenu title="Compras" link="/purchases" src={AvatarCompras} />
+    </GridRoot>
 );
 
 export default ListaButtons;
