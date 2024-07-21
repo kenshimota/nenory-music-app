@@ -5,7 +5,7 @@ import styled from "@mui/material/styles/styled";
 
 import AddIcon from "@mui/icons-material/Add";
 
-import DialogCreateSupplier from "./DialogCreateSupplier";
+import DialogCreateSupplier from "./DialogCreateProduct";
 
 const IconButtonStyled = styled(IconButton)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
@@ -15,7 +15,7 @@ const AddIconStyled = styled(AddIcon)(({ theme }) => ({
     color: "white",
 }));
 
-const ButtonCreateSupplier = ({ onSave, ...props }) => {
+const ButtonCreateProduct = ({ onSave, ...props }) => {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
@@ -40,4 +40,4 @@ const ButtonCreateSupplier = ({ onSave, ...props }) => {
     );
 };
 
-export default ButtonCreateSupplier;
+export default ButtonCreateProduct;

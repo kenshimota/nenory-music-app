@@ -161,7 +161,8 @@ const ShowListDataMobile = ({
                             align="center"
                             color="primary"
                         >
-                            No hay datos
+                            No se encontraron coincidencias con la información
+                            ingresada. Verifique e intente nuevamente.
                         </Typography>
                     </Grid>
                 </GridNotFound>

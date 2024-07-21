@@ -4,9 +4,9 @@ import IconButton from "@mui/material/IconButton";
 
 import EditIcon from "@mui/icons-material/Edit";
 
-import DialogEditSupplier from "./DialogEditSupplier";
+import DialogEditProduct from "./DialogEditProduct";
 
-const ButtonEditSupplier = ({ onSave, supplierId, ...props }) => {
+const ButtonEditProduct = ({ onSave, productId, ...props }) => {
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
@@ -19,9 +19,9 @@ const ButtonEditSupplier = ({ onSave, supplierId, ...props }) => {
 
     return (
         <React.Fragment>
-            <DialogEditSupplier
+            <DialogEditProduct
                 open={open}
-                supplierId={supplierId}
+                productId={productId}
                 onClose={handleClose}
                 onSave={onSave}
             />
@@ -32,4 +32,4 @@ const ButtonEditSupplier = ({ onSave, supplierId, ...props }) => {
     );
 };
 
-export default ButtonEditSupplier;
+export default ButtonEditProduct;

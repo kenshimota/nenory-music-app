@@ -6,7 +6,7 @@ import Loading from "../../components/Loading";
 import MainPage from "../../components/MainPage";
 import useAutoGetAPI from "../../hooks/useAutoGetAPI";
 import TableProducts from "./TableProducts";
-import ButtonCreateSupplier from "./ButtonCreateSupplier";
+import ButtonCreateProduct from "./ButtonCreateProduct";
 import ToolbarProducts from "./ToolbarProducts";
 import FooterPagination from "../../components/FooterPagination";
 
@@ -59,7 +59,7 @@ const ProductsScreen = () => {
     });
 
     return (
-        <MainPage title="Nenory Coffee" subtitle="Proveedores" isBack>
+        <MainPage title="Nenory Coffee" subtitle="Productos" isBack>
             <GridRoot container spacing={1}>
                 <GridToolbar item xs={12}>
                     <Grid container justifyContent="center">
@@ -100,7 +100,7 @@ const ProductsScreen = () => {
                         onBack={() => setPage(page - 1)}
                         onNext={() => setPage(page + 1)}
                     >
-                        <ButtonCreateSupplier
+                        <ButtonCreateProduct
                             color="primary"
                             variant="contained"
                             onSave={reload}

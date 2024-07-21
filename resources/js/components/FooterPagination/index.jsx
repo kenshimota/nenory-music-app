@@ -21,7 +21,7 @@ const FooterPagination = ({
                     <ArrowBack />
                 </IconButton>
                 {children}
-                <IconButton disabled={!isBack} onClick={onBack}>
+                <IconButton disabled={!isNext} onClick={onNext}>
                     <ArrowForward />
                 </IconButton>
             </Grid>

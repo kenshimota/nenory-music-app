@@ -1,14 +1,14 @@
 import React from "react";
 
 import Dialog from "@mui/material/Dialog";
-import FormSupplier from "./FormSupplier";
+import FormProduct from "./FormProduct";
 import usePostAPI from "../../hooks/usePostAPI";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 
 const DialogCreateSupplierContent = ({ onSave, onClose, ...props }) => {
     const { request, loading, error, status } = usePostAPI({
-        url: "/suppliers",
+        url: "/products",
     });
 
     const onSubmit = async (values) => {
@@ -25,7 +25,7 @@ const DialogCreateSupplierContent = ({ onSave, onClose, ...props }) => {
     };
 
     return (
-        <FormSupplier
+        <FormProduct
             onSubmit={onSubmit}
             disabled={loading}
             onClose={onClose}
@@ -35,8 +35,8 @@ const DialogCreateSupplierContent = ({ onSave, onClose, ...props }) => {
 };
 
 const DialogCreateSupplier = ({ open, onClose, ...props }) => (
-    <Dialog open={open} maxWidth="sm" fullWidth onClose={onClose}>
-        <DialogTitle>Nuevo Proveedor</DialogTitle>
+    <Dialog open={open} maxWidth="xs" fullWidth onClose={onClose}>
+        <DialogTitle>Nuevo Producto</DialogTitle>
         <DialogContent>
             <DialogCreateSupplierContent onClose={onClose} {...props} />
         </DialogContent>

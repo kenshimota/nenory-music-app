@@ -38,7 +38,7 @@ const ToolbarProducts = ({ onSubmit: submit, ...props }) => {
                     <Grid container spacing={1} justifyContent="flex-end">
                         <Grid item xs={12} md={6}>
                             <Input
-                                label="Nombre"
+                                label="Buscar por"
                                 name="search"
                                 placeholder="Buscar..."
                             />

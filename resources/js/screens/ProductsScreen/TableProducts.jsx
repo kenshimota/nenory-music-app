@@ -5,27 +5,18 @@ import Link from "@mui/material/Link";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 
 import Format from "../../components/Format";
-import ButtonEditSupplier from "./ButtonEditSupplier";
+import ButtonEditProduct from "./ButtonEditProduct";
 import ShowListData from "../../components/ShowListData";
-import ButtonDeleteSupplier from "./ButtonDeleteSupplier";
+import ButtonDeleteProduct from "./ButtonDeleteProduct";
 
 const columns = [
+    { id: "code", title: "Codigo" },
     { id: "name", title: "Nombre" },
     {
-        id: "email",
-        title: "Correo Electronico",
-        Provider: ({ value }) => <Link href={`mailto:${value}`}>{value}</Link>,
-    },
-    {
-        id: "identity_document",
-        title: "Documento de identidad",
+        id: "stock",
+        title: "Existencia",
         props: { align: "right" },
-        Provider: ({ value }) => <Format.DocumentIdentity value={value} />,
-    },
-    {
-        id: "city",
-        title: "Ciudad",
-        Provider: ({ value }) => value.name,
+        Provider: ({ value }) => <Format.Number value={value} />,
     },
     {
         id: "created_at",
@@ -43,18 +34,17 @@ const columns = [
 
 const TableProductsActions = ({ row, onSave, ...props }) => (
     <React.Fragment>
-        {/*<ButtonEditSupplier supplierId={row.id} onSave={onSave} />
-        <ButtonDeleteSupplier supplierId={row.id} onSave={onSave} />*/}
+        <ButtonEditProduct productId={row.id} onSave={onSave} />
+        <ButtonDeleteProduct productId={row.id} onSave={onSave} />
     </React.Fragment>
 );
 
 const TableProducts = (props) => (
     <ShowListData
-        icon={<AccountCircleIcon />}
+        icon={<AddBoxIcon />}
         columns={columns}
         firstColumn="name"
         secondColumn="code"
-        currentItems={currentItems}
         ComponentActions={TableProductsActions}
         {...props}
     />

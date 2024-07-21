@@ -4,10 +4,10 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import useDeleteAPI from "../../hooks/useDeleteAPI";
 import DialogConfirmation from "../../components/DialogConfirmation";
 
-function ButtonDeleteSupplier({ supplierId, disabled, onSave, ...props }) {
+function ButtonDeleteProduct({ productId, disabled, onSave, ...props }) {
     const [open, setOpen] = useState(false);
     const { request, loading } = useDeleteAPI({
-        url: `/suppliers/${supplierId}`,
+        url: `/products/${productId}`,
     });
     disabled = disabled || loading;
 
@@ -27,8 +27,8 @@ function ButtonDeleteSupplier({ supplierId, disabled, onSave, ...props }) {
                 open={open}
                 onConfirmation={onDelete}
                 onClose={() => setOpen(false)}
-                title="Eliminar Proveedor"
-                content="¿Esta seguro de que desea eliminar este proveedor?"
+                title="Eliminar Producto"
+                content="¿Esta seguro de que desea eliminar este producto?"
             />
             <IconButton
                 disabled={disabled}
@@ -42,4 +42,4 @@ function ButtonDeleteSupplier({ supplierId, disabled, onSave, ...props }) {
     );
 }
 
-export default ButtonDeleteSupplier;
+export default ButtonDeleteProduct;

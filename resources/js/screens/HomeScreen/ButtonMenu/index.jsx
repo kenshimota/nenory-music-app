@@ -5,10 +5,10 @@ import Avatar from "@mui/material/Avatar";
 import { Grid, styled } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
-import AvatarUsuario from "../../../../img/usuario.png";
-import AvatarProveedor from "../../../../img/proveedor2.png";
-import AvatarProducts from "../../../../img/products.webp";
 import AvatarCompras from "../../../../img/compras.jpg";
+import AvatarUsuario from "../../../../img/usuario.png";
+import AvatarProducts from "../../../../img/products.webp";
+import AvatarProveedor from "../../../../img/proveedor2.png";
 
 const GridItem = styled(Grid)(({ theme }) => ({
     margin: theme.spacing(1),
@@ -52,18 +52,14 @@ function ButtonMenu({ title, src, link }) {
 
 const ListaButtons = () => (
     <Grid container justifyContent="center">
-        <ButtonMenu title={"usuarios"} link="/users" src={AvatarUsuario} />
+        <ButtonMenu title="Usuarios" link="/users" src={AvatarUsuario} />
         <ButtonMenu
-            title={"proveedor"}
+            title={"Proveedor"}
             link="/suppliers"
             src={AvatarProveedor}
         />
-        <ButtonMenu
-            title={"productos"}
-            link="/suppliers"
-            src={AvatarProducts}
-        />
-        <ButtonMenu title={"Compras"} link="/suppliers" src={AvatarCompras} />
+        <ButtonMenu title="Productos" link="/products" src={AvatarProducts} />
+        <ButtonMenu title="Compras" link="/purchases" src={AvatarCompras} />
     </Grid>
 );
 
