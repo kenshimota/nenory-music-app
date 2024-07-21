@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import styled from "@mui/material/styles/styled";
 import Collapse from "@mui/material/Collapse";
 
+import NotFoundImg from "../../../img/not-found.jpeg";
+
 const ListCustom = styled(List)(({ theme }) => ({
     padding: theme.spacing(1),
     overflow: "auto",
@@ -142,9 +144,26 @@ const ShowListDataMobile = ({
                     alignContent="center"
                     justifyContent="center"
                 >
-                    <Typography variant="h6" aling="center" color="primary">
-                        No hay datos
-                    </Typography>
+                    <Grid item xs={12}>
+                        <Grid container justifyContent="center">
+                            <Avatar
+                                src={NotFoundImg}
+                                alt="Not Found"
+                                variant="square"
+                                style={{ height: 200, width: 200 }}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography
+                            variant="h6"
+                            component="p"
+                            align="center"
+                            color="primary"
+                        >
+                            No hay datos
+                        </Typography>
+                    </Grid>
                 </GridNotFound>
             )}
 

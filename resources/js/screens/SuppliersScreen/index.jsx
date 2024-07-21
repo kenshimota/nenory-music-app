@@ -66,9 +66,10 @@ const SuppliersScreen = () => {
                         <GridToolbarItem item>
                             <Grid container justifyContent="flex-end">
                                 <Toolbar
-                                    onSubmit={(newValues) =>
-                                        setFilters(newValues)
-                                    }
+                                    onSubmit={(newValues) => {
+                                        setPage(1);
+                                        setFilters(newValues);
+                                    }}
                                 />
                             </Grid>
                         </GridToolbarItem>
