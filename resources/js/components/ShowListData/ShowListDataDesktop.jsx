@@ -7,12 +7,14 @@ import IconButton from "@mui/material/IconButton";
 import TableRow from "@mui/material/TableRow";
 import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
-import TableFooter from "@mui/material/TableFooter";
+
 import TableContainer from "@mui/material/TableContainer";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import styled from "@mui/material/styles/styled";
 
 import { ArrowForward, ArrowBack } from "@mui/icons-material";
+
+import ShowNotData from "./ShowNotData";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -49,7 +51,7 @@ const TableContainerCustom = styled(TableContainer)(() => ({
     maxWidth: 1200,
     width: "100%",
     borderRadius: "10",
-    height: "calc(100% - 60px)",
+    maxHeight: "calc(100% - 60px)",
     overflow: "auto",
 }));
 
@@ -114,17 +116,20 @@ const ShowListDataDesktop = ({
                 </TableBody>
             </Table>
         </TableContainerCustom>
-        <GridPagination item>
-            <Grid container justifyContent="flex-end">
-                <IconButton disabled={!isBack} onClick={onBack}>
-                    <ArrowBack />
-                </IconButton>
+        {currentItems.length !== 0 && (
+            <GridPagination item>
+                <Grid container justifyContent="flex-end">
+                    <IconButton disabled={!isBack} onClick={onBack}>
+                        <ArrowBack />
+                    </IconButton>
 
-                <IconButton disabled={!isNext} onClick={onNext}>
-                    <ArrowForward />
-                </IconButton>
-            </Grid>
-        </GridPagination>
+                    <IconButton disabled={!isNext} onClick={onNext}>
+                        <ArrowForward />
+                    </IconButton>
+                </Grid>
+            </GridPagination>
+        )}
+        {currentItems.length === 0 && <ShowNotData />}
     </GridContent>
 );
 

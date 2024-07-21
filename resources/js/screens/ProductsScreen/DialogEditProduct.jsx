@@ -14,8 +14,6 @@ const DialogEditProductForm = ({ productId, onSave, onClose, ...props }) => {
         url: `/products/${productId}`,
     });
 
-    console.log(onSave);
-
     const onSubmit = async (values) => {
         const res = await request(values);
         if (!res) {

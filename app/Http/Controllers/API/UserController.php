@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller {
 
@@ -23,7 +24,8 @@ class UserController extends Controller {
             $tableUser->where("name", "LIKE", "%{$request->search}%")
                 ->orWhere("last_name", "LIKE", "%{$request->search}%")
                 ->orWhere("username", "LIKE", "%{$request->search}%")
-                ->orWhere("email", "LIKE", "%{$request->search}%");
+                ->orWhere("email", "LIKE", "%{$request->search}%")
+                ->orWhere(DB::raw("CONCAT( '(', username, ') - ',  name, ' ', last_name)"), "LIKE", "%{$request->search}%");
         }
 
         return response()->json($tableUser->paginate(20));

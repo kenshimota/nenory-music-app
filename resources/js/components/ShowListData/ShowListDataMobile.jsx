@@ -9,6 +9,7 @@ import styled from "@mui/material/styles/styled";
 import Collapse from "@mui/material/Collapse";
 
 import NotFoundImg from "../../../img/not-found.jpeg";
+import ShowNotData from "./ShowNotData";
 
 const ListCustom = styled(List)(({ theme }) => ({
     padding: theme.spacing(1),
@@ -19,6 +20,9 @@ const ListCustom = styled(List)(({ theme }) => ({
 const ListItemCustom = styled(ListItem)(({ theme }) => ({
     background: theme.palette.background.paper,
     borderBottom: "1px solid #ddd",
+    borderRight: "1px solid #ddd",
+    borderLeft: "1px solid #ddd",
+    marginBottom: theme.spacing(1),
 }));
 
 const GridWithAvatar = styled(Grid)(({ theme }) => ({
@@ -79,7 +83,7 @@ const ListItemShow = ({
                         <ShowDataValue
                             row={current}
                             id={secondColumn}
-                            Provider={providers.get(firstColumn) || null}
+                            Provider={providers.get(secondColumn) || null}
                         />
                     </Typography>
                 </ComponentTitle>
@@ -138,36 +142,7 @@ const ShowListDataMobile = ({
 }) => {
     return (
         <ListCustom>
-            {currentItems.length === 0 && (
-                <GridNotFound
-                    container
-                    alignContent="center"
-                    justifyContent="center"
-                >
-                    <Grid item xs={12}>
-                        <Grid container justifyContent="center">
-                            <Avatar
-                                src={NotFoundImg}
-                                alt="Not Found"
-                                variant="square"
-                                style={{ height: 200, width: 200 }}
-                            />
-                        </Grid>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Typography
-                            variant="h6"
-                            component="p"
-                            align="center"
-                            color="primary"
-                        >
-                            No se encontraron coincidencias con la información
-                            ingresada. Verifique e intente nuevamente.
-                        </Typography>
-                    </Grid>
-                </GridNotFound>
-            )}
-
+            {currentItems.length === 0 && <ShowNotData />}
             {currentItems.map((current, key) => (
                 <React.Fragment key={key}>
                     <ListItemShow current={current} {...props} />

@@ -34,7 +34,7 @@ const SelectForm = ({
     };
 
     return (
-        <FormControl variant="standard" fullWidth>
+        <FormControl error={Boolean(error)} variant="standard" fullWidth>
             <InputLabel id={labelId}>{label}</InputLabel>
             <Select
                 labelId={labelId}
@@ -47,7 +47,7 @@ const SelectForm = ({
             >
                 {children}
             </Select>
-            {error && <FormHelperText>{error}</FormHelperText>}
+            {error && <FormHelperText error>{error}</FormHelperText>}
         </FormControl>
     );
 };

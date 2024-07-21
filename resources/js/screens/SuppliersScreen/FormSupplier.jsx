@@ -1,7 +1,6 @@
 import * as yup from "yup";
 import React from "react";
 import Grid from "@mui/material/Grid";
-import styled from "@mui/material/styles/styled";
 
 import SaveIcon from "@mui/icons-material/Save";
 import CloseIcon from "@mui/icons-material/Close";
@@ -10,6 +9,7 @@ import Form from "../../components/Form";
 import Input from "../../components/Input";
 import ButtonCommon from "../../components/ButtonCommon";
 import AutocompleteCities from "../../components/AutocompleteCities";
+import InputSupplierIdentity from "../../components/InputSupplierIdentity";
 
 const schema = yup.object().shape({
     city: yup
@@ -69,8 +69,7 @@ const FormSupplier = ({
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <Input
-                        type="number"
+                    <InputSupplierIdentity
                         label="Documento de Identidad"
                         name="identity_document"
                         errors={errors}

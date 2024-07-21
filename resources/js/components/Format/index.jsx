@@ -4,7 +4,12 @@ import numeral from "numeral";
 export const Date = ({ value }) => {
     const date = moment(value);
     const DateFormat = date.format("DD/MM/YYYY");
+    return DateFormat;
+};
 
+export const DateTime = ({ value }) => {
+    const date = moment(value);
+    const DateFormat = date.format("DD/MM/YYYY HH:mm");
     return DateFormat;
 };
 
@@ -20,4 +25,9 @@ export const DocumentIdentity = ({ value }) => {
     return NumberFormat.split(",").join(".");
 };
 
-export default { Number, Date, DocumentIdentity };
+export const FillZero = ({ value, amount = 6 }) => {
+    const numero = value;
+    return numero.toString().padStart(amount, "0");
+};
+
+export default { Number, Date, DocumentIdentity, DateTime, FillZero };

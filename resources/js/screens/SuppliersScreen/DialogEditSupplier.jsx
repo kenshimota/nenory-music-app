@@ -13,8 +13,6 @@ const DialogEditSupplierForm = ({ supplierId, onSave, onClose, ...props }) => {
         url: `/suppliers/${supplierId}`,
     });
 
-    console.log(onSave);
-
     const onSubmit = async (values) => {
         const res = await request(values);
         if (!res) {

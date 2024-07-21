@@ -8,9 +8,10 @@ use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\StatesController;
 use App\Http\Controllers\API\CitiesController;
+use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\MeasuresController;
 use App\Http\Controllers\API\SuppliersController;
 use App\Http\Controllers\API\PurchasesController;
-use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\IngredientsController;
 use App\Http\Controllers\API\PurchaseItemsController;
 use App\Http\Controllers\API\ProductIngredientsController;
@@ -33,6 +34,7 @@ Route::group(['prefix' => 'auth'], function () {
 Route::get("roles", [RoleController::class, "index"]);
 Route::get("cities", [CitiesController::class, "index"]);
 Route::get("states", [StatesController::class, "index"]);
+Route::get("measures", [MeasuresController::class, "index"]);
 
 Route::group([ "middleware" => ["auth:api", "auth"] ], function(){
     Route::apiResource("users",UserController::class);

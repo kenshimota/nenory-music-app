@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder {
             [
                 "name" => "Numerico",
                 "measures" => [
-                    ["name" => "unidades", "abreviated" => "", "amount" => 1],
+                    ["name" => "unidades", "abreviated" => "c/u", "amount" => 1],
                 ]
             ]
         ];

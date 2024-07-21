@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger('purchase_id');
             $table->unsignedBigInteger('ingredient_id');
             $table->unsignedBigInteger('measure_id');
-            $table->integer('quantity');
+            $table->float('quantity');
             $table->double('cost');
             $table->foreign('purchase_id')->references('id')->on('purchases');
             $table->timestamps();

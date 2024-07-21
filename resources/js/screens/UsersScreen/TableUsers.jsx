@@ -32,13 +32,13 @@ const columns = [
         id: "created_at",
         title: "Fecha de creación",
         props: { align: "right" },
-        Provider: ({ value }) => <Format.Date value={value} />,
+        Provider: ({ value }) => <Format.DateTime value={value} />,
     },
     {
         id: "updated_at",
         title: "Fecha de actualización",
         props: { align: "right" },
-        Provider: ({ value }) => <Format.Date value={value} />,
+        Provider: ({ value }) => <Format.DateTime value={value} />,
     },
 ];
 
