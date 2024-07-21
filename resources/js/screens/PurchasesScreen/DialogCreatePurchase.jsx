@@ -19,8 +19,6 @@ const DialogCreatePurchaseContent = ({
         }
     };
 
-    console.log(onSave);
-
     return (
         <MainPage
             title={`${isEdit ? "Editar" : "Creat"} Nueva Compra`}

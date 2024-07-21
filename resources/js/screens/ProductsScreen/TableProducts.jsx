@@ -8,6 +8,7 @@ import Format from "../../components/Format";
 import ButtonEditProduct from "./ButtonEditProduct";
 import ShowListData from "../../components/ShowListData";
 import ButtonDeleteProduct from "./ButtonDeleteProduct";
+import ButtonCreateIngredients from "./ButtonCreateIngredients";
 
 const columns = [
     { id: "code", title: "Codigo" },
@@ -34,6 +35,7 @@ const columns = [
 
 const TableProductsActions = ({ row, onSave, ...props }) => (
     <React.Fragment>
+        <ButtonCreateIngredients />
         <ButtonEditProduct productId={row.id} onSave={onSave} />
         <ButtonDeleteProduct productId={row.id} onSave={onSave} />
     </React.Fragment>
