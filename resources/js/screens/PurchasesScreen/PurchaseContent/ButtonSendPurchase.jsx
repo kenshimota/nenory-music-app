@@ -54,7 +54,7 @@ const ButtonSendPurchase = ({ onSave, disabled, purchaseId, ...props }) => {
                 title="Completar Compra"
                 content="¿Esta seguro de que desea terminar esta compra?"
             />
-            <IconButtonStyled {...props} onClick={onOpen}>
+            <IconButtonStyled disabled={disabled} {...props} onClick={onOpen}>
                 <SendIconStyled />
             </IconButtonStyled>
         </React.Fragment>
