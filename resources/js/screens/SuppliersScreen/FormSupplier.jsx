@@ -34,10 +34,6 @@ const schema = yup.object().shape({
         .typeError("el valor ingresado es invalido"),
 });
 
-const Button = styled(ButtonCommon)(({ theme }) => ({
-    marginRight: theme.spacing(1),
-}));
-
 const FormSupplier = ({
     onClose,
     disabled,
@@ -95,23 +91,23 @@ const FormSupplier = ({
                     <Input label="Dirección" name="address" errors={errors} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Grid container justifyContent="flex-end">
-                        <Button
+                    <Grid container justifyContent="space-between">
+                        <ButtonCommon
                             disabled={disabled}
                             type="submit"
                             size="small"
                             endIcon={<SaveIcon />}
                         >
                             Guardar
-                        </Button>
-                        <Button
+                        </ButtonCommon>
+                        <ButtonCommon
                             disabled={disabled}
                             onClick={onClose}
                             size="small"
                             startIcon={<CloseIcon />}
                         >
                             Cerrar
-                        </Button>
+                        </ButtonCommon>
                     </Grid>
                 </Grid>
             </Grid>

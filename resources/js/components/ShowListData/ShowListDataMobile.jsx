@@ -11,7 +11,7 @@ import Collapse from "@mui/material/Collapse";
 const ListCustom = styled(List)(({ theme }) => ({
     padding: theme.spacing(1),
     overflow: "auto",
-    maxHeight: "100%",
+    height: "100%",
 }));
 
 const ListItemCustom = styled(ListItem)(({ theme }) => ({
@@ -30,6 +30,10 @@ const GridWithoutAvatar = styled(Grid)(({ theme }) => ({
 
 const GridContent = styled(Grid)(({ theme }) => ({
     marginTop: theme.spacing(1),
+}));
+
+const GridNotFound = styled(Grid)(({ theme }) => ({
+    height: "100%",
 }));
 
 const ShowDataValue = ({ Provider, id, row }) => (
@@ -132,6 +136,18 @@ const ShowListDataMobile = ({
 }) => {
     return (
         <ListCustom>
+            {currentItems.length === 0 && (
+                <GridNotFound
+                    container
+                    alignContent="center"
+                    justifyContent="center"
+                >
+                    <Typography variant="h6" aling="center" color="primary">
+                        No hay datos
+                    </Typography>
+                </GridNotFound>
+            )}
+
             {currentItems.map((current, key) => (
                 <React.Fragment key={key}>
                     <ListItemShow current={current} {...props} />
