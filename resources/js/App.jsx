@@ -18,9 +18,9 @@ const App = () => {
         </Auth>
     );
 };
+
 if (!globalThis.process || process.env.NODE_ENV !== "test") {
     window.addEventListener("load", () => {
-        console.log("execute");
         const dom = document.querySelector("#react-root");
 
         if (!dom) {

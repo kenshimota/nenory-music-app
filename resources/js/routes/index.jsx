@@ -8,6 +8,11 @@ import SignUpScreen from "../screens/SignUpScreen";
 import LoginScreen from "../screens/LoginScreen/index";
 import ForgetPasswordScreen from "../screens/ForgetPasswordScreen";
 import RouterWithoutSession from "../components/RouteWithoutSession";
+import SuppliersScreen from "../screens/SuppliersScreen";
+import ProductsScreen from "../screens/ProductsScreen";
+import IngredientsScreen from "../screens/IngredientsScreen";
+import NotFoundScreen from "../screens/NotFoundScreen";
+import PurchasesScreen from "../screens/PurchasesScreen";
 
 const routerUser = [
     {
@@ -17,6 +22,26 @@ const routerUser = [
     {
         path: "/users",
         element: <UsersScreen />,
+    },
+    {
+        path: "/suppliers",
+        element: <SuppliersScreen />,
+    },
+    {
+        path: "/products",
+        element: <ProductsScreen />,
+    },
+    {
+        path: "/ingredients",
+        element: <IngredientsScreen />,
+    },
+    {
+        path: "/purchases",
+        element: <PurchasesScreen />,
+    },
+    {
+        path: "*",
+        element: <NotFoundScreen />,
     },
 ]
     .map((route) => ({
@@ -40,6 +65,10 @@ const routerPublic = [
     {
         path: "/signup",
         element: <SignUpScreen />,
+    },
+    {
+        path: "*",
+        element: <NotFoundScreen />,
     },
 ]
     .map((route) => ({

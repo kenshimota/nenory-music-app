@@ -11,6 +11,7 @@ import ButtonExit from "../../components/ButtonExit";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../Auth";
 
 const TypographyCustom = styled(Typography)(({ theme }) => ({
     color: theme.palette.background.paper,
@@ -24,14 +25,21 @@ const ButtonExitCustom = styled(ButtonExit)(({ theme }) => ({
     color: theme.palette.background.paper,
 }));
 
-function BackButton() {
+function BackButton({ onBack, ...props }) {
     const navigate = useNavigate();
+
     const onClick = () => {
+        if (onBack) {
+            onBack();
+            return;
+        }
+
         navigate(-1);
     };
 
     return (
         <IconButtonCustom
+            {...props}
             onClick={onClick}
             size="medium"
             edge="start"
@@ -42,14 +50,16 @@ function BackButton() {
     );
 }
 
-export default function SearchAppBar({ subtitle, isBack }) {
+export default function SearchAppBar({ subtitle, isBack, onBack }) {
+    const { session } = useAuth();
+
     return (
         <AppBar position="fixed">
             <Toolbar>
                 <Grid container justifyContent="space-between">
                     <Grid item>
                         <Grid container>
-                            {!isBack && (
+                            {session && !isBack && (
                                 <IconButtonCustom
                                     size="medium"
                                     edge="start"
@@ -60,7 +70,9 @@ export default function SearchAppBar({ subtitle, isBack }) {
                                     <MenuIcon />
                                 </IconButtonCustom>
                             )}{" "}
-                            {isBack && <BackButton />}
+                            {session && isBack && (
+                                <BackButton onBack={onBack} />
+                            )}
                         </Grid>
                     </Grid>
                     <Grid item>
@@ -81,9 +93,7 @@ export default function SearchAppBar({ subtitle, isBack }) {
                             </TypographyCustom>
                         )}
                     </Grid>
-                    <Grid item>
-                        <ButtonExitCustom />
-                    </Grid>
+                    <Grid item>{session && <ButtonExitCustom />}</Grid>
                 </Grid>
             </Toolbar>
         </AppBar>

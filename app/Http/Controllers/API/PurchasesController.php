@@ -11,12 +11,34 @@ class PurchasesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return Purchase::all();
+    public function index(Request $request){
+        $tablePurchase = Purchase::query();
+        $tablePurchase->with(["supplier", "user"])->select("purchases.*");
+        $tablePurchase->join('suppliers', 'suppliers.id', '=', 'purchases.supplier_id');
+
+        if($request->has("search")){
+            $tablePurchase->where("number", "LIKE", "%{$request->search}%");
+            $tablePurchase->orWhere("purchases.number", "LIKE", "%{$request->search}%");
+        }
+
+        if($request->has("from")){
+            $tablePurchase->where("purchases.created_at", ">=", $request->from);
+        }
+
+        if($request->has("to")){
+            $tablePurchase->where("purchases.created_at", "<=", $request->to);
+        }
+
+        if($request->has("supplier_id")){
+            $tablePurchase->where("supplier_id", $request->supplier_id);
+        }
+
+        if($request->has("user_id")){
+            $tablePurchase->where("user_id", $request->user_id);
+        }
+
+        return $tablePurchase->paginate(20);
     }
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -55,14 +77,30 @@ class PurchasesController extends Controller
      * Display the specified resource.
      */
     public function show(string $id){
-        return Purchase::findOrFail($id);
+        return Purchase::with(["supplier", "user"])->findOrFail($id);
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id){
+        $arr = [];
+        $purchase = Purchase::with(["supplier", "user"])->findOrFail($id);
+        $items = $purchase->purchaseItems()->with(["ingredient", "measure"])->get();
 
+        foreach($items as $item) {
+            $ingredient = $item->ingredient()->first();
+            $quantity = $ingredient->convertMeasure($item->measure_id, $item->quantity);
+           $ingredient->stock += $quantity;
+            $ingredient->save();
+        }
+
+        $purchase->state = "completed";
+        $purchase->save();
+        
+        $purchase = Purchase::with(["supplier", "user"])->findOrFail($id);
+
+        return response()->json($purchase, 202);
     }
 
     /**

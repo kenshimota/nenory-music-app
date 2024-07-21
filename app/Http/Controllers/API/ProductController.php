@@ -11,8 +11,15 @@ class ProductController extends Controller{
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        return Product::all();
+    public function index(Request $request) {
+        $tableProduct = Product::query();
+
+        if($request->has("search")){
+            $tableProduct->where("name", "LIKE", "%{$request->search}%")
+                    ->orWhere("code", "LIKE", "%{$request->search}%");
+        }
+
+        return $tableProduct->paginate(20);
     }
 
     public function store(Request $request) {
@@ -38,8 +45,10 @@ class ProductController extends Controller{
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id){
+        $product = Product::findOrFail($id);
+
         $validator = $request->validate([
-            'code' => ['required','min:5','unique:products'],
+            'code' => ['required','min:5','unique:products,code,'.$product->id],
             'name' => ['required', 'min:4', 'max:255'],
         ]);
 

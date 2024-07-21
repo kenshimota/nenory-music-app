@@ -19,9 +19,9 @@ class AppServiceProvider extends ServiceProvider {
      * Bootstrap any application services.
      */
     public function boot(UrlGenerator $url): void {
-        Passport::tokensExpireIn(now()->addMinutes(15));
-        Passport::refreshTokensExpireIn(now()->addMinutes(30));
-        Passport::personalAccessTokensExpireIn(now()->addMinutes(15));
+        Passport::tokensExpireIn(now()->addMinutes(45));
+        Passport::refreshTokensExpireIn(now()->addMinutes(90));
+        Passport::personalAccessTokensExpireIn(now()->addMinutes(45));
         
         if (env('APP_ENV') == 'production') {
             $url->forceScheme('https');

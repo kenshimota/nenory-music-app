@@ -3,7 +3,20 @@ import { useEffect } from "react";
 import useGetAPI from "./useGetAPI";
 import { useAuth } from "../components/Auth";
 
+const getQueryValid = (query) => {
+    if (!query) {
+        return {};
+    }
+
+    const entries = Object.entries(query);
+
+    return Object.fromEntries(
+        entries.filter(([_, val]) => val !== undefined && val !== null)
+    );
+};
+
 const useAutoGetAPI = ({ url, query }) => {
+    query = getQueryValid(query);
     const { session, clearToken } = useAuth() || {};
     const queryParams = new URLSearchParams(query);
     const queryString = queryParams.toString();
@@ -19,7 +32,7 @@ const useAutoGetAPI = ({ url, query }) => {
         }
 
         request({ headers });
-    }
+    };
 
     useEffect(() => {
         reload();

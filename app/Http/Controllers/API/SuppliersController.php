@@ -13,6 +13,12 @@ class SuppliersController extends Controller {
      */
     public function index(Request $request){
         $tableSupplier = Supplier::query();
+        $tableSupplier->with("city");
+
+
+        if($request->has("city_id")) {
+            $tableSupplier->where("city_id", $request->city_id);
+        }
 
         if($request->has("search")){
             $tableSupplier->where("name", "LIKE", "%{$request->search}%")
@@ -53,17 +59,19 @@ class SuppliersController extends Controller {
      * Display the specified resource.
      */
     public function show(string $id){
-        return Supplier::findOrFail($id);
+        return Supplier::with("city")->findOrFail($id);
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id){
+        Supplier::with("city")->findOrFail($id);
+
         $validator = $request->validate([
             'name' => ['min:3', 'max:255'],
-            'email' => ['email','unique:suppliers'],
-            'identity_document' => ['unique:suppliers'],
+            'email' => ['email','unique:suppliers,email,'.$id],
+            'identity_document' => ['unique:suppliers,identity_document,'.$id],
             'code_postal' => ['integer'],
             'city_id' => ['exists:cities,id'],
             'address' => ['string','min:5','max:255']
