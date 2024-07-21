@@ -1,6 +1,9 @@
+import * as yup from "yup";
 import * as React from "react";
 
+import Grid from "@mui/material/Grid";
 import Dialog from "@mui/material/Dialog";
+import Typography from "@mui/material/Typography";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 
@@ -8,6 +11,19 @@ import FormUser from "./FormUser";
 import Loading from "../../components/Loading";
 import usePutAPI from "../../hooks/usePutAPI";
 import useAutoGetAPI from "../../hooks/useAutoGetAPI";
+
+const schema = yup.object().shape({
+    role_id: yup
+        .number()
+        .required("Debe selecccionar un tipo de usuario")
+        .typeError("Valor seleccionado es invalido"),
+    last_name: yup.string().required("El campo es requerido"),
+    name: yup.string().required("El campo es requerido"),
+    identity_document: yup
+        .number()
+        .positive("el valor ingresado debe de ser positivo")
+        .required("El campo es requerido"),
+});
 
 const DialogEditUserContentForm = ({ userId, onSave, onClose, ...props }) => {
     const { request, loading, status, error } = usePutAPI({
@@ -28,16 +44,29 @@ const DialogEditUserContentForm = ({ userId, onSave, onClose, ...props }) => {
     };
 
     return (
-        <FormUser
-            hideEmail
-            hideUsername
-            hidePasssword
-            disabled={loading}
-            onSubmit={onSubmit}
-            onClose={onClose}
-            errors={status === 422 && error && error.errors}
-            {...props}
-        />
+        <Grid container>
+            {status === 500 && (
+                <Grid item xs={12}>
+                    <Typography variant="body1" color="error">
+                        Ha ocurrido un error inhesperado, por favor contacte al
+                        proveedor
+                    </Typography>
+                </Grid>
+            )}
+            <Grid item xs={12}>
+                <FormUser
+                    // schema={schema}
+                    hideEmail
+                    hideUsername
+                    hidePasssword
+                    disabled={loading}
+                    onSubmit={onSubmit}
+                    onClose={onClose}
+                    errors={status === 422 && error && error.errors}
+                    {...props}
+                />
+            </Grid>
+        </Grid>
     );
 };
 

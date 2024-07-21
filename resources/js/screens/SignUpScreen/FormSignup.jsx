@@ -14,6 +14,7 @@ import Input from "../../components/Input";
 import usePostAPI from "../../hooks/usePostAPI";
 import InputPass from "../../components/InputPass";
 import ButtonCommon from "../../components/ButtonCommon";
+import InputIdentityDocument from "../../components/InputIdentityDocument";
 
 const FormCustom = styled(Form)(({ theme }) => ({
     width: "100%",
@@ -108,10 +109,9 @@ const FormSignup = ({ onSave, ...props }) => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <Input
+                    <InputIdentityDocument
                         name="identity_document"
                         label="Cédula de Identidad"
-                        type="number"
                         errors={status === 422 && error.errors}
                     />
                 </Grid>

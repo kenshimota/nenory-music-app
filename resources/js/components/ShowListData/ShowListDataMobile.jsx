@@ -8,10 +8,6 @@ import Typography from "@mui/material/Typography";
 import styled from "@mui/material/styles/styled";
 import Collapse from "@mui/material/Collapse";
 
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
-
-import ButtonCommon from "../ButtonCommon";
-
 const ListCustom = styled(List)(({ theme }) => ({
     padding: theme.spacing(1),
     overflow: "auto",
@@ -34,17 +30,6 @@ const GridWithoutAvatar = styled(Grid)(({ theme }) => ({
 
 const GridContent = styled(Grid)(({ theme }) => ({
     marginTop: theme.spacing(1),
-}));
-
-const GridRoot = styled(Grid)(({ theme }) => ({
-    height: "100%",
-    width: "100%",
-    position: "relative",
-    margin: theme.spacing(0),
-}));
-
-const GridContentList = styled(Grid)(({ theme }) => ({
-    height: "calc(100% - 100px)",
 }));
 
 const ShowDataValue = ({ Provider, id, row }) => (
@@ -146,35 +131,13 @@ const ShowListDataMobile = ({
     ...props
 }) => {
     return (
-        <GridRoot container>
-            <GridContentList item xs={12}>
-                <ListCustom>
-                    {currentItems.map((current, key) => (
-                        <React.Fragment key={key}>
-                            <ListItemShow current={current} {...props} />
-                        </React.Fragment>
-                    ))}
-                </ListCustom>
-            </GridContentList>
-            <Grid item xs={12}>
-                <Grid container justifyContent="space-between">
-                    <ButtonCommon
-                        startIcon={<ArrowBack />}
-                        disabled={!isBack}
-                        onClick={onBack}
-                    >
-                        Atras
-                    </ButtonCommon>
-                    <ButtonCommon
-                        endIcon={<ArrowForward />}
-                        disabled={!isNext}
-                        onClick={onNext}
-                    >
-                        Siguiente
-                    </ButtonCommon>
-                </Grid>
-            </Grid>
-        </GridRoot>
+        <ListCustom>
+            {currentItems.map((current, key) => (
+                <React.Fragment key={key}>
+                    <ListItemShow current={current} {...props} />
+                </React.Fragment>
+            ))}
+        </ListCustom>
     );
 };
 

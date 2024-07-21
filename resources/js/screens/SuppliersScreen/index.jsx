@@ -8,6 +8,7 @@ import useAutoGetAPI from "../../hooks/useAutoGetAPI";
 import TableSuppliers from "./TableSuppliers";
 import ButtonCreateSupplier from "./ButtonCreateSupplier";
 import ToolbarSuppliers from "./ToolbarSuppliers";
+import FooterPagination from "../../components/FooterPagination";
 
 const GridRoot = styled(Grid)(({ theme }) => ({
     width: "100%",
@@ -16,13 +17,11 @@ const GridRoot = styled(Grid)(({ theme }) => ({
     margin: theme.spacing(0),
 }));
 
-const GridContent = styled(Grid)(({ theme }) => ({
+const GridContent = styled(Grid)(() => ({
     height: "calc(100% - 120px)",
     width: "100%",
+    overflow: "hidden",
     position: "relative",
-    [theme.breakpoints.down("sm")]: {
-        height: "calc(100% - 100px)",
-    },
 }));
 
 const GridToolbarItem = styled(Grid)(({ theme }) => ({
@@ -42,6 +41,10 @@ const GridToolbar = styled(Grid)(({ theme }) => ({
     },
 }));
 
+const GridFooter = styled(Grid)(({ theme }) => ({
+    padding: theme.spacing(1),
+}));
+
 const Toolbar = styled(ToolbarSuppliers)(({ theme }) => ({
     width: "100%",
     maxWidth: 600,
@@ -57,7 +60,7 @@ const SuppliersScreen = () => {
 
     return (
         <MainPage title="Nenory Coffee" subtitle="Proveedores" isBack>
-            <GridRoot container>
+            <GridRoot container spacing={1}>
                 <GridToolbar item xs={12}>
                     <Grid container justifyContent="center">
                         <GridToolbarItem item>
@@ -86,15 +89,23 @@ const SuppliersScreen = () => {
                         />
                     )}
                 </GridContent>
-                <Grid item xs={12}>
-                    <Grid container justifyContent="center">
+                <GridFooter item xs={12}>
+                    <FooterPagination
+                        isBack={response && response.current_page !== 1}
+                        isNext={
+                            response &&
+                            response.current_page !== response.last_page
+                        }
+                        onBack={() => setPage(page - 1)}
+                        onNext={() => setPage(page + 1)}
+                    >
                         <ButtonCreateSupplier
                             color="primary"
                             variant="contained"
                             onSave={reload}
                         />
-                    </Grid>
-                </Grid>
+                    </FooterPagination>
+                </GridFooter>
             </GridRoot>
         </MainPage>
     );

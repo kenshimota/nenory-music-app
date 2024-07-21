@@ -7,6 +7,7 @@ import ButtonCreate from "./ButtonCreate";
 import Loading from "../../components/Loading";
 import useAutoGetAPI from "../../hooks/useAutoGetAPI";
 import MainPage from "../../components/MainPage";
+import FooterPagination from "../../components/FooterPagination";
 
 const GridRoot = styled(Grid)(({ theme }) => ({
     width: "100%",
@@ -86,9 +87,17 @@ const UsersScreen = (props) => {
                     )}
                 </GridContent>
                 <GridContent2 item xs={12}>
-                    <Grid container justifyContent="center">
+                    <FooterPagination
+                        isBack={response && response.current_page !== 1}
+                        isNext={
+                            response &&
+                            response.current_page !== response.last_page
+                        }
+                        onBack={() => setPage(page - 1)}
+                        onNext={() => setPage(page + 1)}
+                    >
                         <ButtonCreate onSave={reload} />
-                    </Grid>
+                    </FooterPagination>
                 </GridContent2>
             </GridRoot>
         </MainPage>

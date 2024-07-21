@@ -10,6 +10,7 @@ import Input from "../../components/Input";
 import InputPass from "../../components/InputPass";
 import ButtonCommon from "../../components/ButtonCommon";
 import SelectRole from "../../components/SelectRole";
+import InputIdentityDocument from "../../components/InputIdentityDocument";
 
 const FormUser = ({
     onClose,
@@ -57,10 +58,9 @@ const FormUser = ({
                 </Grid>
             )}
             <Grid item xs={12}>
-                <Input
+                <InputIdentityDocument
                     name="identity_document"
                     label="Cedula de identidad"
-                    type="text"
                     errors={errors}
                 />
             </Grid>
@@ -77,6 +77,7 @@ const FormUser = ({
             <Grid item xs={12}>
                 <Grid container justifyContent="space-between">
                     <ButtonCommon
+                        size="small"
                         startIcon={<CloseIcon />}
                         disabled={disabled}
                         onClick={onClose}
@@ -84,6 +85,7 @@ const FormUser = ({
                         Cancelar
                     </ButtonCommon>
                     <ButtonCommon
+                        size="small"
                         endIcon={<SaveIcon />}
                         disabled={disabled}
                         type="submit"
