@@ -13,6 +13,7 @@ import ProductsScreen from "../screens/ProductsScreen";
 import IngredientsScreen from "../screens/IngredientsScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import PurchasesScreen from "../screens/PurchasesScreen";
+import ProtectedScreen from "../components/ProtectedScreen";
 
 const routerUser = [
     {
@@ -21,7 +22,11 @@ const routerUser = [
     },
     {
         path: "/users",
-        element: <UsersScreen />,
+        element: (
+            <ProtectedScreen roles={["admin"]}>
+                <UsersScreen />
+            </ProtectedScreen>
+        ),
     },
     {
         path: "/suppliers",
