@@ -1,6 +1,7 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { CircularProgress } from "@mui/material";
 
 import { useForm } from "../Form";
 
@@ -8,6 +9,7 @@ function AutocompleteForm({
     disabled,
     change,
     error,
+    loading,
     errors: errs,
     name,
     options,
@@ -50,6 +52,20 @@ function AutocompleteForm({
                     helperText={error}
                     disabled={disabled}
                     label={label}
+                    InputProps={{
+                        ...params.InputProps,
+                        endAdornment: (
+                            <React.Fragment>
+                                {loading ? (
+                                    <CircularProgress
+                                        color="inherit"
+                                        size={20}
+                                    />
+                                ) : null}
+                                {params.InputProps.endAdornment}
+                            </React.Fragment>
+                        ),
+                    }}
                 />
             )}
         />
