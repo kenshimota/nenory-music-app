@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
 import IconButton from "@mui/material/IconButton";
-import DialogCreateIngredients from "./DialogCreateIngredients";
 
-function ButtonCreateIngredients({ onSave, productId, ...props }) {
+import SoupKitchenIcon from "@mui/icons-material/SoupKitchen";
+
+import DialogProcessProduct from "./DialogProcessProduct";
+
+const ButtonProcessProduct = ({ productId, onSave, ...props }) => {
     const [open, setOpen] = useState(false);
 
     const onOpen = () => {
@@ -16,16 +18,17 @@ function ButtonCreateIngredients({ onSave, productId, ...props }) {
 
     return (
         <React.Fragment>
-            <DialogCreateIngredients
+            <DialogProcessProduct
                 open={open}
                 onClose={onClose}
                 productId={productId}
+                onSave={onSave}
             />
-            <IconButton {...props} onClick={onOpen}>
-                <MenuBookIcon />
+            <IconButton onClick={onOpen} {...props}>
+                <SoupKitchenIcon />
             </IconButton>
         </React.Fragment>
     );
-}
+};
 
-export default ButtonCreateIngredients;
+export default ButtonProcessProduct;

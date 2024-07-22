@@ -44,5 +44,7 @@ Route::group([ "middleware" => ["auth:api", "auth"] ], function(){
     Route::apiResource("ingredients", IngredientsController::class);
     Route::apiResource("product_ingredients", ProductIngredientsController::class);
     Route::apiResource("purchase_items", PurchaseItemsController::class);
+
+    Route::put("products/{id}/update-stock", [ProductController::class, "updateStock"]);
 });
 

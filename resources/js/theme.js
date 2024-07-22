@@ -48,16 +48,9 @@ const themes = {
     },
 };
 
-const getMedia = (media) =>
-    media
-        .slice(1, media.length - 1)
-        .split(":")
-        .pop()
-        .trim();
-
 const getThemeOS = () => {
     const ref = window.matchMedia("(prefers-color-scheme: light)");
-    const media = getMedia(ref.media);
+    const media = ref.matches ? "light" : "dark";
     return { ref, media };
 };
 
@@ -66,9 +59,14 @@ const useTheme = () => {
     const [themeOs, setThemeOs] = useState(media);
     const theme = { ...themes[themeOs], ...themes.default };
 
+    console.log({ media, theme });
+
     useEffect(() => {
         ref.addEventListener("change", (e) => {
             const newTheme = e.matches ? "light" : "dark";
+
+            console.log({ newTheme, a: e.matches });
+
             setThemeOs(newTheme);
         });
     }, []);
