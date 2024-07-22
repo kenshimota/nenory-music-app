@@ -12,6 +12,7 @@ import Form from "../../components/Form";
 import usePutAPI from "../../hooks/usePutAPI";
 import InputNumber from "../../components/InputNumber";
 import ButtonCommon from "../../components/ButtonCommon";
+import { Typography } from "@mui/material";
 
 const schema = yup.object().shape({
     quantity: yup
@@ -49,6 +50,13 @@ const DialogProcessProductContent = ({
     return (
         <Form schema={schema} disabled={loading} onSubmit={onSubmit}>
             <Grid container spacing={2}>
+                {status === 400 && error && (
+                    <Grid item xs={12}>
+                        <Typography variant="body1" color="error">
+                            {error.error}
+                        </Typography>
+                    </Grid>
+                )}
                 <Grid item xs={12}>
                     <InputNumber
                         name="quantity"

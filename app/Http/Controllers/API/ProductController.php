@@ -78,25 +78,31 @@ class ProductController extends Controller{
         }
 
         $product_ingredients = ProductIngredient::where("product_id", "=", $id)->get();
+        $this->quantitySended = $validator["quantity"];
 
         $quantities = $product_ingredients->filter(function(ProductIngredient $pi){
             $ingredient = $pi->ingredient()->first();
-            $quantity = $ingredient->convertMeasure( $pi->measure_id, $pi->quantity );
-            return $quantity <  $ingredient->stock;
+            $quantity = $ingredient->convertMeasure( $pi->measure_id, $pi->quantity ) * $this->quantitySended;
+            return $quantity < $ingredient->stock;
         })->map(function(ProductIngredient $pi){
             $ingredient = $pi->ingredient()->first();
             $quantity = $ingredient->convertMeasure( $pi->measure_id, $pi->quantity );
             return $quantity;
-        });
+        });        
+
 
         if(count($quantities) < count($product_ingredients)){
-            return response()->json(["error" => "No hay suficiente caldo para todos los ingredientes."], 400);
+            return response()->json(["error" => "No hay suficiente existencia para todos los ingredientes."], 400);
+        }
+
+        if(count($quantities) === 0) {
+            return response()->json(["error" => "No hay ingredientes disponibles, No se puede procesar sin ingredientes"], 400);
         }
 
         foreach($product_ingredients as $pi){
             $ingredient = $pi->ingredient()->first();
             $quantity = $ingredient->convertMeasure( $pi->measure_id, $pi->quantity );
-            $ingredient->stock -= $quantity;
+            $ingredient->stock -= $quantity * $validator["quantity"];
             $ingredient->save();
         }
 
@@ -106,9 +112,6 @@ class ProductController extends Controller{
         return response()->json(Product::find($id), 202);
     }
 
-
-
-
     /**
      * Remove the specified resource from storage.
      */
@@ -117,4 +120,6 @@ class ProductController extends Controller{
         $product->delete();
         return response()->json(null, 204);
     }
+
+
 }

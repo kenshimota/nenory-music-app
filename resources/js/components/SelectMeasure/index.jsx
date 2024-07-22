@@ -10,8 +10,6 @@ function SelectMeasure({ measure_type_id, ...props }) {
     });
     const measures = response || [];
 
-    console.log(measure_type_id);
-
     return (
         <SelectForm {...props}>
             {measures &&

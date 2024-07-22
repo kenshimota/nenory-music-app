@@ -27,8 +27,6 @@ function ProductsIngredientsContents({ productId, ...props }) {
         query: { page, product_id: productId },
     });
 
-    console.log(response);
-
     return (
         <GridRoot container spacing={1}>
             <GridContent item xs={12}>
