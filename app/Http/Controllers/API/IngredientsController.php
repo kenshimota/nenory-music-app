@@ -54,6 +54,8 @@ class IngredientsController extends Controller {
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id){
+        $ingredient = Ingredient::with("measure")->findOrFail($id);
+
         $validator = $request->validate([
             'name' => ['required','min:4','max:255', 'unique:ingredients,name,'.$id],
             'measure_id' => ["required", "exists:measures,id"],
@@ -63,7 +65,16 @@ class IngredientsController extends Controller {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $ingredient = Ingredient::whereId($id)->update($validator);
+        $ingredient->name = $validator["name"];
+        if($ingredient->measure_id != $validator["measure_id"]){
+            $stock = $ingredient->convertFromMeasure($ingredient->measure_id, $validator["measure_id"], $ingredient->stock);
+            $ingredient->stock = $stock;
+            $ingredient->measure_id = $validator["measure_id"];
+        }
+
+        $ingredient->save();
+            
+        # Ingredient::whereId($id)->update($validator);
         return response()->json(Ingredient::with("measure")->find($id), 202);
     }
 

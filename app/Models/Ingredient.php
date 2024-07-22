@@ -18,11 +18,12 @@ class Ingredient extends Model {
         'measure_id',
     ];
 
-
-    public function convertMeasure($measure_id, $quantity) {
+    public function convertFromMeasure($m_from, $m_to, $quantity) {
         $query = MeasureRelationship::query();
-        $relationship = $query->where("measure_id", $measure_id)
-            ->where("related_measure_id", $this->measure_id)
+
+
+        $relationship = $query->where("measure_id", $m_from)
+            ->where("related_measure_id", $m_to)
             ->first();
 
         if(empty($relationship)){
@@ -31,8 +32,10 @@ class Ingredient extends Model {
 
         return $quantity / $relationship->amount;
     }
-    
 
+    public function convertMeasure($measure_id, $quantity) {
+        return  $this->convertFromMeasure($measure_id, $this->measure_id, $quantity);
+    }
 
     public function measure() {
         return $this->belongsTo(Measure::class, "measure_id", "id");

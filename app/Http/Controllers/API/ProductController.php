@@ -83,7 +83,7 @@ class ProductController extends Controller{
         $quantities = $product_ingredients->filter(function(ProductIngredient $pi){
             $ingredient = $pi->ingredient()->first();
             $quantity = $ingredient->convertMeasure( $pi->measure_id, $pi->quantity ) * $this->quantitySended;
-            return $quantity < $ingredient->stock;
+            return $quantity <= $ingredient->stock;
         })->map(function(ProductIngredient $pi){
             $ingredient = $pi->ingredient()->first();
             $quantity = $ingredient->convertMeasure( $pi->measure_id, $pi->quantity );
