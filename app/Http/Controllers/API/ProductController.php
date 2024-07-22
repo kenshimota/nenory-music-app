@@ -5,7 +5,9 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-
+use Illuminate\Support\Facades\DB;
+use App\Models\ProductIngredient;
+use App\Models\Ingredient;
 
 class ProductController extends Controller{
     /**
@@ -59,6 +61,53 @@ class ProductController extends Controller{
         $product = Product::whereId($id)->update($validator);
         return response()->json(Product::find($id), 202);
     }
+
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function updateStock(Request $request, string $id){
+        $product = Product::findOrFail($id);
+
+        $validator = $request->validate([
+            'quantity' => ['required', 'gt:0'],
+        ]);
+
+        if (!is_array($validator) &&  $validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $product_ingredients = ProductIngredient::where("product_id", "=", $id)->get();
+
+        $quantities = $product_ingredients->filter(function(ProductIngredient $pi){
+            $ingredient = $pi->ingredient()->first();
+            $quantity = $ingredient->convertMeasure( $pi->measure_id, $pi->quantity );
+            return $quantity <  $ingredient->stock;
+        })->map(function(ProductIngredient $pi){
+            $ingredient = $pi->ingredient()->first();
+            $quantity = $ingredient->convertMeasure( $pi->measure_id, $pi->quantity );
+            return $quantity;
+        });
+
+        if(count($quantities) < count($product_ingredients)){
+            return response()->json(["error" => "No hay suficiente caldo para todos los ingredientes."], 400);
+        }
+
+        foreach($product_ingredients as $pi){
+            $ingredient = $pi->ingredient()->first();
+            $quantity = $ingredient->convertMeasure( $pi->measure_id, $pi->quantity );
+            $ingredient->stock -= $quantity;
+            $ingredient->save();
+        }
+
+        $product->stock += $validator["quantity"];
+        $product->save();
+
+        return response()->json(Product::find($id), 202);
+    }
+
+
+
 
     /**
      * Remove the specified resource from storage.

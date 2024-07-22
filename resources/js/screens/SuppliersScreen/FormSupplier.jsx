@@ -93,19 +93,19 @@ const FormSupplier = ({
                     <Grid container justifyContent="space-between">
                         <ButtonCommon
                             disabled={disabled}
-                            type="submit"
-                            size="small"
-                            endIcon={<SaveIcon />}
-                        >
-                            Guardar
-                        </ButtonCommon>
-                        <ButtonCommon
-                            disabled={disabled}
                             onClick={onClose}
                             size="small"
                             startIcon={<CloseIcon />}
                         >
                             Cerrar
+                        </ButtonCommon>
+                        <ButtonCommon
+                            disabled={disabled}
+                            type="submit"
+                            size="small"
+                            endIcon={<SaveIcon />}
+                        >
+                            Guardar
                         </ButtonCommon>
                     </Grid>
                 </Grid>
