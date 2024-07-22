@@ -12,7 +12,7 @@ export const useAuth = () => useContext(AuthContext);
 const AuthProvider = ({ children }) => {
     const [session, setSession] = useLocalStorage(null);
     const [currentUser, setCurrentUser] = useState(null);
-    const { request } = useGetAPI({ url: "/auth/me" });
+    const { request, loading } = useGetAPI({ url: "/auth/me" });
 
     const loadUser = async function ({ token, type }) {
         const res = await request({
@@ -51,7 +51,14 @@ const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider
-            value={{ session, currentUser, setToken, setSession, clearToken }}
+            value={{
+                session,
+                loading,
+                currentUser,
+                setToken,
+                setSession,
+                clearToken,
+            }}
         >
             {children}
         </AuthContext.Provider>
