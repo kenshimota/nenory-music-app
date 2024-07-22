@@ -59,13 +59,9 @@ const useTheme = () => {
     const [themeOs, setThemeOs] = useState(media);
     const theme = { ...themes[themeOs], ...themes.default };
 
-    console.log({ media, theme });
-
     useEffect(() => {
         ref.addEventListener("change", (e) => {
             const newTheme = e.matches ? "light" : "dark";
-
-            console.log({ newTheme, a: e.matches });
 
             setThemeOs(newTheme);
         });

@@ -14,8 +14,6 @@ const SelectMeasureCustom = (props) => {
     const { values } = useForm();
     const { ingredient } = values;
 
-    console.log(ingredient);
-
     return (
         <SelectMeasure
             {...props}
